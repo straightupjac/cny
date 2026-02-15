@@ -15,8 +15,9 @@
       --light-gold: #FFF8E1;
     }
     @import url('https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;700&family=Inter:wght@300;400;500;600;700&display=swap');
-    *{margin:0;padding:0;box-sizing:border-box}
+    *{margin:0;padding:0;box-sizing:border-box;cursor:url('firecracker-cursor.png') 16 0,auto}
     body{font-family:'Inter',sans-serif;background:var(--soft-white);color:var(--ink-black);overflow-x:hidden}
+    a,button,[role="button"],[x-on\\:click],[\\@click]{cursor:url('firecracker-cursor.png') 16 0,pointer}
     .font-cn{font-family:'Noto Serif SC',serif}
 
     /* === Animations === */
@@ -39,8 +40,48 @@
     .pop-in{animation:popIn .4s cubic-bezier(.22,1,.36,1) both}
     .gentle-pulse{animation:gentlePulse 2s ease-in-out infinite}
 
-    .geo-border{background:repeating-linear-gradient(90deg,var(--imperial-red) 0px,var(--imperial-red) 20px,var(--harvest-gold) 20px,var(--harvest-gold) 24px,transparent 24px,transparent 30px);height:4px}
-    .horse-bg{opacity:.04;position:absolute;right:-5%;top:50%;transform:translateY(-50%);width:50%;max-width:500px}
+    /* Character animations — each suits their personality */
+    @keyframes charBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-6px)}}
+    @keyframes charSway{0%,100%{transform:rotate(-2deg)}50%{transform:rotate(2deg)}}
+    @keyframes charNod{0%,100%{transform:translateY(0) rotate(0)}40%{transform:translateY(-3px) rotate(2deg)}70%{transform:translateY(-1px) rotate(-1deg)}}
+    @keyframes charBounce{0%,100%{transform:translateY(0)}30%{transform:translateY(-10px)}50%{transform:translateY(-2px)}70%{transform:translateY(-8px)}}
+    @keyframes charTilt{0%,100%{transform:rotate(-3deg)}50%{transform:rotate(3deg)}}
+    @keyframes charBustle{0%,100%{transform:translateY(0) translateX(0)}25%{transform:translateY(-4px) translateX(2px)}75%{transform:translateY(-4px) translateX(-2px)}}
+    @keyframes charFume{0%,100%{transform:translateX(0) rotate(0)}15%{transform:translateX(-4px) rotate(-1deg)}30%{transform:translateX(3px) rotate(1deg)}45%{transform:translateX(-3px)}60%{transform:translateX(2px) rotate(-1deg)}80%{transform:translateX(0)}}
+    @keyframes charWave{0%,100%{transform:rotate(0deg)}25%{transform:rotate(-4deg)}50%{transform:rotate(3deg)}75%{transform:rotate(-2deg)}}
+
+    .hero-char,.mobile-guests>div{transform-origin:center bottom}
+    .char-ahma{animation:charSway 5s ease-in-out infinite}
+    .char-boonhuat{animation:charNod 3.5s ease-in-out infinite}
+    .char-david{animation:charBounce 2.5s ease-in-out infinite}
+    .char-jenny{animation:charTilt 4.5s ease-in-out infinite}
+    .char-lim{animation:charBustle 2s ease-in-out infinite}
+    .char-uncle-tan{animation:charWave 4s ease-in-out infinite}
+    .char-nephew{animation:charBounce 1.8s ease-in-out infinite}
+    .char-couple{animation:charSway 6s ease-in-out infinite}
+    .char-weijie{animation:charWave 3s ease-in-out infinite}
+    .char-aloysius{animation:charNod 4s ease-in-out infinite}
+    .char-charmaine{animation:charBustle 2.5s ease-in-out infinite}
+    .char-jerrold{animation:charBounce 2.2s ease-in-out infinite}
+    .quiz-char svg{animation:charBob 2.5s ease-in-out infinite;transform-origin:center bottom}
+
+    /* Whimsical decorative animations */
+    @keyframes floatSlow{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-8px) rotate(2deg)}}
+    @keyframes floatMed{0%,100%{transform:translateY(0) rotate(0deg)}50%{transform:translateY(-12px) rotate(-3deg)}}
+    @keyframes lanternSway{0%,100%{transform:rotate(-3deg)}50%{transform:rotate(3deg)}}
+    @keyframes horseBob{0%,100%{transform:translateY(0)}50%{transform:translateY(-8px)}}
+    .float-slow{animation:floatSlow 6s ease-in-out infinite}
+    .float-med{animation:floatMed 5s ease-in-out infinite}
+    .lantern-sway{animation:lanternSway 4s ease-in-out infinite;transform-origin:top center;transform-box:fill-box}
+    .horse-bob{animation:horseBob 3.5s ease-in-out infinite}
+
+    .geo-border{height:6px;background:linear-gradient(90deg,var(--imperial-red) 0%,var(--harvest-gold) 25%,var(--imperial-red) 50%,var(--harvest-gold) 75%,var(--imperial-red) 100%)}
+
+    /* Ornate card */
+    .ornate-card{border:2px solid var(--harvest-gold);box-shadow:0 4px 24px rgba(188,0,45,.06),0 0 0 1px rgba(255,215,0,.12)}
+    .mahjong-frame{position:relative;border:48px solid transparent;border-image:url('mahjong-border.png') 160 fill/48px/0 stretch;padding:56px 20px}
+    @media(min-width:640px){.mahjong-frame{border-width:72px;border-image-width:72px;padding:64px 56px}}
+    @media(min-width:768px){.mahjong-frame{border-width:88px;border-image-width:88px;padding:72px 72px}}
 
     /* Hongbao tracker */
     .hb-icon{font-size:1.6rem;transition:all .3s ease;filter:grayscale(1) opacity(.3)}
@@ -50,8 +91,8 @@
     .character-spotlight{transition:all .4s cubic-bezier(.22,1,.36,1)}
 
     /* Answer option */
-    .answer-option{transition:all .3s cubic-bezier(.22,1,.36,1);cursor:pointer;user-select:none;-webkit-user-select:none}
-    .answer-option:hover:not(.opt-correct):not(.opt-wrong):not(.opt-disabled){transform:translateY(-3px);box-shadow:0 8px 24px rgba(188,0,45,.1);border-color:var(--imperial-red)}
+    .answer-option{transition:box-shadow .3s cubic-bezier(.22,1,.36,1),border-color .3s ease;cursor:pointer;user-select:none;-webkit-user-select:none}
+    .answer-option:hover:not(.opt-correct):not(.opt-wrong):not(.opt-disabled){box-shadow:0 8px 24px rgba(188,0,45,.1);border-color:var(--imperial-red)}
     .answer-option.opt-correct{border-color:#16a34a!important;background:rgba(22,163,74,.05)!important}
     .answer-option.opt-wrong{border-color:var(--imperial-red)!important;background:rgba(188,0,45,.04)!important;animation:shake .5s ease-in-out}
     .answer-option.opt-disabled{opacity:.4;pointer-events:none}
@@ -84,73 +125,236 @@
 
   <!-- ==================== HERO ==================== -->
   <header class="relative overflow-hidden px-4 sm:px-6 pt-16 sm:pt-20 pb-10" style="background:linear-gradient(135deg,var(--soft-white) 0%,var(--light-gold) 100%);min-height:100vh;min-height:100dvh">
-    <svg class="horse-bg" viewBox="0 0 400 400" fill="none"><path d="M320 280c-10-40-30-60-50-80-5-5-8-15-5-25 5-15 15-30 10-50-5-15-20-25-35-20-5-20-20-35-40-35-15 0-25 8-30 20-10-5-25-5-35 5-15 15-10 35-5 50l-20 30c-15 20-25 45-20 70 5 30 25 55 55 65l10 3c15 5 30 7 45 7h30c20 0 40-5 55-15 20-13 35-35 40-60 3-15-1-30-5-45z" fill="var(--imperial-red)"/><ellipse cx="215" cy="155" rx="4" ry="5" fill="var(--harvest-gold)"/></svg>
+    <!-- Cherry blossom branch across top -->
+    <svg class="absolute top-0 left-0 w-full pointer-events-none" style="height:70px" viewBox="0 0 1000 70" preserveAspectRatio="xMidYMin slice" fill="none">
+      <path d="M-20,28 C80,20 180,38 300,30 C400,22 480,40 580,32 C680,24 800,38 920,30 C960,28 1000,32 1020,30" stroke="#8B5E3C" stroke-width="2.5" fill="none" opacity=".35"/>
+      <path d="M150,30 C145,24 138,18 132,12" stroke="#8B5E3C" stroke-width="1.5" fill="none" opacity=".3"/>
+      <path d="M420,34 C425,28 430,22 428,14" stroke="#8B5E3C" stroke-width="1.5" fill="none" opacity=".3"/>
+      <path d="M700,28 C695,22 690,16 686,10" stroke="#8B5E3C" stroke-width="1.5" fill="none" opacity=".3"/>
+      <circle cx="132" cy="12" r="5" fill="#FFB7C5" opacity=".5"/><circle cx="138" cy="8" r="4" fill="#FFB7C5" opacity=".4"/><circle cx="127" cy="8" r="3.5" fill="#FFB7C5" opacity=".45"/><circle cx="132" cy="12" r="2" fill="#FFD700" opacity=".4"/>
+      <circle cx="428" cy="14" r="5.5" fill="#FFB7C5" opacity=".5"/><circle cx="434" cy="10" r="4" fill="#FFB7C5" opacity=".4"/><circle cx="422" cy="10" r="4" fill="#FFB7C5" opacity=".45"/><circle cx="428" cy="14" r="2" fill="#FFD700" opacity=".4"/>
+      <circle cx="686" cy="10" r="5" fill="#FFB7C5" opacity=".5"/><circle cx="692" cy="7" r="4" fill="#FFB7C5" opacity=".4"/><circle cx="680" cy="7" r="3.5" fill="#FFB7C5" opacity=".45"/><circle cx="686" cy="10" r="2" fill="#FFD700" opacity=".4"/>
+      <g class="lantern-sway"><line x1="250" y1="32" x2="250" y2="52" stroke="#BC002D" stroke-width="1" opacity=".45"/><rect x="243" y="46" width="14" height="18" rx="5" fill="#BC002D" opacity=".45"/><line x1="245" y1="51" x2="257" y2="51" stroke="#FFD700" stroke-width="1" opacity=".35"/><line x1="250" y1="64" x2="250" y2="68" stroke="#FFD700" stroke-width="1" opacity=".25"/></g>
+      <g class="lantern-sway" style="animation-delay:.6s"><line x1="560" y1="34" x2="560" y2="52" stroke="#BC002D" stroke-width="1" opacity=".4"/><rect x="553" y="46" width="14" height="16" rx="5" fill="#BC002D" opacity=".4"/><line x1="555" y1="50" x2="567" y2="50" stroke="#FFD700" stroke-width="1" opacity=".35"/><line x1="560" y1="62" x2="560" y2="65" stroke="#FFD700" stroke-width="1" opacity=".25"/></g>
+      <g class="lantern-sway" style="animation-delay:1.2s"><line x1="850" y1="30" x2="850" y2="48" stroke="#BC002D" stroke-width="1" opacity=".45"/><rect x="843" y="42" width="14" height="17" rx="5" fill="#BC002D" opacity=".45"/><line x1="845" y1="47" x2="857" y2="47" stroke="#FFD700" stroke-width="1" opacity=".35"/><line x1="850" y1="59" x2="850" y2="62" stroke="#FFD700" stroke-width="1" opacity=".25"/></g>
+    </svg>
+
+    <!-- Floating decorative elements — clouds, stars, blossoms, mandarins -->
+    <svg class="absolute pointer-events-none float-slow hidden md:block" style="right:18%;top:22%;width:55px;opacity:.12" viewBox="0 0 60 30" fill="none"><path d="M5,25 C5,18 1,14 8,10 C6,4 16,0 24,5 C28,1 38,1 40,8 C46,6 52,12 48,16 C52,20 48,25 44,26 Z" fill="var(--imperial-red)"/></svg>
+    <svg class="absolute pointer-events-none float-med hidden md:block" style="left:16%;top:36%;width:45px;opacity:.1" viewBox="0 0 60 30" fill="none"><path d="M5,25 C5,18 1,14 8,10 C6,4 16,0 24,5 C28,1 38,1 40,8 C46,6 52,12 48,16 C52,20 48,25 44,26 Z" fill="var(--imperial-red)"/></svg>
+    <svg class="absolute pointer-events-none float-slow hidden md:block" style="left:8%;bottom:22%;width:50px;opacity:.1" viewBox="0 0 60 30" fill="none"><path d="M5,25 C5,18 1,14 8,10 C6,4 16,0 24,5 C28,1 38,1 40,8 C46,6 52,12 48,16 C52,20 48,25 44,26 Z" fill="var(--imperial-red)"/></svg>
+    <svg class="absolute pointer-events-none float-slow hidden md:block" style="right:16%;top:56%;width:24px;opacity:.5" viewBox="0 0 24 24" fill="none"><path d="M12,0 L14,10 L24,12 L14,14 L12,24 L10,14 L0,12 L10,10 Z" fill="var(--harvest-gold)"/></svg>
+    <svg class="absolute pointer-events-none float-med hidden md:block" style="left:14%;top:58%;width:20px;opacity:.4" viewBox="0 0 24 24" fill="none"><path d="M12,0 L14,10 L24,12 L14,14 L12,24 L10,14 L0,12 L10,10 Z" fill="var(--harvest-gold)"/></svg>
+    <svg class="absolute pointer-events-none float-slow hidden md:block" style="right:22%;bottom:18%;width:22px;opacity:.45" viewBox="0 0 24 24" fill="none"><path d="M12,0 L14,10 L24,12 L14,14 L12,24 L10,14 L0,12 L10,10 Z" fill="var(--harvest-gold)"/></svg>
+    <svg class="absolute pointer-events-none float-med hidden md:block" style="left:20%;top:82%;width:28px" viewBox="0 0 24 24" fill="none"><circle cx="8" cy="8" r="4.5" fill="#FFB7C5" opacity=".45"/><circle cx="16" cy="8" r="4.5" fill="#FFB7C5" opacity=".45"/><circle cx="4" cy="14" r="4.5" fill="#FFB7C5" opacity=".45"/><circle cx="20" cy="14" r="4.5" fill="#FFB7C5" opacity=".45"/><circle cx="12" cy="16" r="4.5" fill="#FFB7C5" opacity=".45"/><circle cx="12" cy="12" r="3" fill="#FFD700" opacity=".35"/></svg>
+    <svg class="absolute pointer-events-none float-slow hidden md:block" style="right:24%;top:34%;width:26px" viewBox="0 0 24 24" fill="none"><circle cx="8" cy="8" r="4.5" fill="#FFB7C5" opacity=".35"/><circle cx="16" cy="8" r="4.5" fill="#FFB7C5" opacity=".35"/><circle cx="4" cy="14" r="4.5" fill="#FFB7C5" opacity=".35"/><circle cx="20" cy="14" r="4.5" fill="#FFB7C5" opacity=".35"/><circle cx="12" cy="16" r="4.5" fill="#FFB7C5" opacity=".35"/><circle cx="12" cy="12" r="3" fill="#FFD700" opacity=".3"/></svg>
+    <svg class="absolute pointer-events-none float-med hidden md:block" style="left:28%;bottom:14%;width:28px" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="16" r="10" fill="#FF8C00" opacity=".4"/><ellipse cx="15" cy="8" rx="3" ry="2.5" fill="#16a34a" opacity=".4"/></svg>
+    <svg class="absolute pointer-events-none float-slow hidden md:block" style="right:28%;top:14%;width:26px" viewBox="0 0 28 28" fill="none"><circle cx="14" cy="16" r="10" fill="#FF8C00" opacity=".35"/><ellipse cx="15" cy="8" rx="3" ry="2.5" fill="#16a34a" opacity=".35"/></svg>
 
     <!-- === Scattered characters (desktop: absolute, mobile: grid) === -->
-    <!-- On md+ screens these scatter around the hero via absolute positioning -->
-    <!-- On mobile they form a compact grid below the mission card -->
 
-    <!-- Grandma — top left -->
-    <div class="hero-char hidden md:block absolute" style="left:3%;top:12%;">
+    <!-- Ah Ma — top left -->
+    <div class="hero-char char-ahma hidden md:block absolute" style="left:3%;top:12%;">
       <svg width="70" height="88" viewBox="0 0 56 72" fill="none"><circle cx="28" cy="16" r="11" fill="#FFF" stroke="var(--imperial-red)" stroke-width="2"/><circle cx="23" cy="14" r="1.5" fill="var(--ink-black)"/><circle cx="33" cy="14" r="1.5" fill="var(--ink-black)"/><path d="M24 19c2 2 6 2 8 0" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><circle cx="23" cy="14" r="4" stroke="var(--harvest-gold)" stroke-width="1" fill="none"/><circle cx="33" cy="14" r="4" stroke="var(--harvest-gold)" stroke-width="1" fill="none"/><line x1="27" y1="14" x2="29" y2="14" stroke="var(--harvest-gold)" stroke-width="1"/><ellipse cx="28" cy="6" rx="6" ry="4" fill="var(--imperial-red)" opacity=".15"/><line x1="28" y1="27" x2="28" y2="50" stroke="var(--imperial-red)" stroke-width="2.5" stroke-linecap="round"/><line x1="28" y1="35" x2="18" y2="44" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="35" x2="38" y2="44" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="20" y2="65" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="36" y2="65" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="38" y1="44" x2="42" y2="64" stroke="var(--harvest-gold)" stroke-width="1.5" stroke-linecap="round"/></svg>
-      <p class="text-xs font-semibold text-center" style="color:var(--ink-black)">Grandma</p>
+      <p class="text-xs font-semibold text-center" style="color:var(--ink-black)">Ah Ma</p>
       <p class="text-xs text-gray-400 italic text-center leading-tight">will ask about<br>marriage</p>
     </div>
 
-    <!-- Boss — top right -->
-    <div class="hero-char hidden md:block absolute" style="right:4%;top:8%;">
+    <!-- Boon Huat — top right -->
+    <div class="hero-char char-boonhuat hidden md:block absolute" style="right:4%;top:8%;">
       <svg width="70" height="88" viewBox="0 0 56 72" fill="none"><circle cx="28" cy="16" r="11" fill="#FFF" stroke="var(--imperial-red)" stroke-width="2"/><circle cx="24" cy="14" r="1.5" fill="var(--ink-black)"/><circle cx="32" cy="14" r="1.5" fill="var(--ink-black)"/><path d="M25 19c1.5 1.5 4.5 1.5 6 0" stroke="var(--ink-black)" stroke-width="1.2" stroke-linecap="round"/><path d="M17 12c0-8 8-13 15-11 5 1.5 7 5 7 8" stroke="var(--ink-black)" stroke-width="2" fill="none" stroke-linecap="round"/><line x1="28" y1="27" x2="28" y2="50" stroke="var(--ink-black)" stroke-width="2.5" stroke-linecap="round"/><polygon points="28,28 25,38 28,36 31,38" fill="var(--imperial-red)"/><line x1="28" y1="35" x2="18" y2="43" stroke="var(--ink-black)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="35" x2="38" y2="43" stroke="var(--ink-black)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="21" y2="65" stroke="var(--ink-black)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="35" y2="65" stroke="var(--ink-black)" stroke-width="2" stroke-linecap="round"/></svg>
-      <p class="text-xs font-semibold text-center" style="color:var(--ink-black)">Boss Chen</p>
-      <p class="text-xs text-gray-400 italic text-center leading-tight">mom's mahjong<br>friend</p>
+      <p class="text-xs font-semibold text-center" style="color:var(--ink-black)">Boon Huat</p>
+      <p class="text-xs text-gray-400 italic text-center leading-tight">startup bro</p>
     </div>
 
     <!-- David — left middle -->
-    <div class="hero-char hidden md:block absolute" style="left:6%;top:48%;">
+    <div class="hero-char char-david hidden md:block absolute" style="left:6%;top:48%;">
       <svg width="70" height="88" viewBox="0 0 56 72" fill="none"><circle cx="28" cy="16" r="11" fill="#FFF" stroke="var(--imperial-red)" stroke-width="2"/><circle cx="24" cy="14" r="1.5" fill="var(--ink-black)"/><circle cx="32" cy="14" r="1.5" fill="var(--ink-black)"/><path d="M24 19c2 2 6 2 8 0" stroke="var(--ink-black)" stroke-width="1.2" stroke-linecap="round"/><ellipse cx="28" cy="7" rx="8" ry="3.5" fill="var(--harvest-gold)" opacity=".7"/><polygon points="28,3 26,7 30,7" fill="none" stroke="#fff" stroke-width=".7"/><polygon points="28,8 26,4 30,4" fill="none" stroke="#fff" stroke-width=".7"/><path d="M18 14c-1-4 1-9 4-11" stroke="var(--ink-black)" stroke-width="1.5" fill="none" stroke-linecap="round"/><path d="M38 14c1-4-1-9-4-11" stroke="var(--ink-black)" stroke-width="1.5" fill="none" stroke-linecap="round"/><line x1="28" y1="27" x2="28" y2="50" stroke="var(--imperial-red)" stroke-width="2.5" stroke-linecap="round"/><line x1="28" y1="35" x2="18" y2="44" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="35" x2="38" y2="44" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><rect x="14" y="38" width="4" height="10" rx="1.5" fill="var(--harvest-gold)" opacity=".5"/><rect x="15" y="35" width="2" height="4" rx="1" fill="var(--harvest-gold)" opacity=".5"/><line x1="28" y1="50" x2="21" y2="65" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="35" y2="65" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/></svg>
-      <p class="text-xs font-semibold text-center" style="color:var(--ink-black)">David</p>
+      <p class="text-xs font-semibold text-center" style="color:var(--ink-black)">David W.</p>
       <p class="text-xs text-gray-400 italic text-center leading-tight">here for the<br>dumplings</p>
     </div>
 
     <!-- Jenny — right middle -->
-    <div class="hero-char hidden md:block absolute" style="right:5%;top:44%;">
+    <div class="hero-char char-jenny hidden md:block absolute" style="right:5%;top:44%;">
       <svg width="70" height="88" viewBox="0 0 56 72" fill="none"><circle cx="28" cy="16" r="11" fill="#FFF" stroke="var(--imperial-red)" stroke-width="2"/><circle cx="24" cy="14" r="1.5" fill="var(--ink-black)"/><circle cx="32" cy="14" r="1.5" fill="var(--ink-black)"/><path d="M24 19c2 2 6 2 8 0" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><path d="M17 14c0-9 6-14 11-14s11 5 11 14" stroke="var(--ink-black)" stroke-width="2.5" fill="none"/><line x1="17" y1="14" x2="15" y2="30" stroke="var(--ink-black)" stroke-width="2" stroke-linecap="round"/><line x1="39" y1="14" x2="41" y2="30" stroke="var(--ink-black)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="27" x2="28" y2="50" stroke="var(--imperial-red)" stroke-width="2.5" stroke-linecap="round"/><line x1="28" y1="35" x2="18" y2="44" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="35" x2="38" y2="44" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><rect x="36" y="40" width="5" height="8" rx="1" fill="var(--harvest-gold)" opacity=".5"/><line x1="28" y1="50" x2="21" y2="65" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="35" y2="65" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/></svg>
       <p class="text-xs font-semibold text-center" style="color:var(--ink-black)">Jenny</p>
       <p class="text-xs text-gray-400 italic text-center leading-tight">rediscovering<br>her roots</p>
     </div>
 
-    <!-- Mrs. Lau — bottom left -->
-    <div class="hero-char hidden md:block absolute" style="left:12%;bottom:10%;">
+    <!-- Aunty Lim — bottom left -->
+    <div class="hero-char char-lim hidden md:block absolute" style="left:12%;bottom:10%;">
       <svg width="70" height="88" viewBox="0 0 56 72" fill="none"><circle cx="28" cy="16" r="11" fill="#FFF" stroke="var(--imperial-red)" stroke-width="2"/><circle cx="24" cy="14" r="1.5" fill="var(--ink-black)"/><circle cx="32" cy="14" r="1.5" fill="var(--ink-black)"/><path d="M24 19c2 2 6 2 8 0" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><path d="M19 11c-1-7 5-12 9-12s10 5 9 12" stroke="var(--ink-black)" stroke-width="2" fill="none"/><circle cx="28" cy="4" r="4" fill="var(--ink-black)" opacity=".15"/><line x1="28" y1="27" x2="28" y2="50" stroke="var(--imperial-red)" stroke-width="2.5" stroke-linecap="round"/><path d="M21 32 L35 32 L33 50 L23 50 Z" fill="var(--harvest-gold)" opacity=".2" stroke="var(--harvest-gold)" stroke-width="1"/><line x1="28" y1="28" x2="28" y2="32" stroke="var(--harvest-gold)" stroke-width="1"/><line x1="28" y1="35" x2="18" y2="44" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="35" x2="38" y2="44" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="38" y1="44" x2="44" y2="36" stroke="#16a34a" stroke-width="2" stroke-linecap="round"/><line x1="44" y1="36" x2="46" y2="32" stroke="#16a34a" stroke-width="1.5" stroke-linecap="round"/><line x1="44" y1="36" x2="42" y2="31" stroke="#16a34a" stroke-width="1.5" stroke-linecap="round"/><line x1="28" y1="50" x2="21" y2="65" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="35" y2="65" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/></svg>
-      <p class="text-xs font-semibold text-center" style="color:var(--ink-black)">Mrs. Lau</p>
+      <p class="text-xs font-semibold text-center" style="color:var(--ink-black)">Aunty Lim</p>
       <p class="text-xs text-gray-400 italic text-center leading-tight">knows what<br>you bought</p>
     </div>
 
-    <!-- Mr. Peterson — bottom right -->
-    <div class="hero-char hidden md:block absolute" style="right:10%;bottom:8%;">
-      <svg width="70" height="88" viewBox="0 0 56 72" fill="none"><circle cx="28" cy="16" r="11" fill="#FFF" stroke="var(--imperial-red)" stroke-width="2"/><circle cx="24" cy="14" r="1.5" fill="var(--ink-black)"/><circle cx="32" cy="14" r="1.5" fill="var(--ink-black)"/><path d="M23 20c2-2 6-2 8 0" stroke="var(--ink-black)" stroke-width="1.5" stroke-linecap="round"/><line x1="21" y1="10" x2="26" y2="11.5" stroke="var(--ink-black)" stroke-width="1.5" stroke-linecap="round"/><line x1="35" y1="10" x2="30" y2="11.5" stroke="var(--ink-black)" stroke-width="1.5" stroke-linecap="round"/><path d="M17 11c1-7 5-11 11-11s10 4 11 11" stroke="var(--ink-black)" stroke-width="2" fill="none"/><line x1="22" y1="2" x2="20" y2="0" stroke="var(--ink-black)" stroke-width="1.5" stroke-linecap="round"/><line x1="30" y1="1" x2="32" y2="-1" stroke="var(--ink-black)" stroke-width="1.5" stroke-linecap="round"/><line x1="26" y1="1" x2="25" y2="-1" stroke="var(--ink-black)" stroke-width="1.5" stroke-linecap="round"/><line x1="28" y1="27" x2="28" y2="50" stroke="#8B7D6B" stroke-width="2.5" stroke-linecap="round"/><path d="M22 28 L28 38 L34 28" stroke="#8B7D6B" stroke-width="1.5" fill="none" stroke-linecap="round"/><line x1="18" y1="36" x2="38" y2="36" stroke="#8B7D6B" stroke-width="2" stroke-linecap="round"/><line x1="18" y1="36" x2="20" y2="40" stroke="#8B7D6B" stroke-width="2" stroke-linecap="round"/><line x1="38" y1="36" x2="36" y2="40" stroke="#8B7D6B" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="21" y2="63" stroke="#8B7D6B" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="35" y2="63" stroke="#8B7D6B" stroke-width="2" stroke-linecap="round"/><ellipse cx="19" cy="65" rx="4" ry="2" fill="#8B7D6B" opacity=".3"/><ellipse cx="37" cy="65" rx="4" ry="2" fill="#8B7D6B" opacity=".3"/><path d="M42 20c2-3 2-6 0-8" stroke="#ccc" stroke-width="1" fill="none" stroke-linecap="round"/><path d="M46 22c2-3 2-6 0-8" stroke="#ccc" stroke-width="1" fill="none" stroke-linecap="round"/></svg>
-      <p class="text-xs font-semibold text-center" style="color:var(--ink-black)">Mr. Peterson</p>
-      <p class="text-xs text-gray-400 italic text-center leading-tight">smells the fish</p>
+    <!-- Uncle Tan — bottom right -->
+    <div class="hero-char char-uncle-tan hidden md:block absolute" style="right:10%;bottom:8%;">
+      <svg width="70" height="88" viewBox="0 0 56 72" fill="none"><circle cx="28" cy="16" r="11" fill="#FFF" stroke="var(--imperial-red)" stroke-width="2"/><circle cx="24" cy="14" r="1.5" fill="var(--ink-black)"/><circle cx="32" cy="14" r="1.5" fill="var(--ink-black)"/><path d="M25 19c1.5 1.5 4.5 1.5 6 0" stroke="var(--ink-black)" stroke-width="1.2" stroke-linecap="round"/><path d="M18 12c0-7 5-12 10-12s10 5 10 12" stroke="var(--ink-black)" stroke-width="2" fill="none"/><line x1="28" y1="27" x2="28" y2="50" stroke="var(--imperial-red)" stroke-width="2.5" stroke-linecap="round"/><line x1="28" y1="35" x2="18" y2="44" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="35" x2="38" y2="44" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="21" y2="65" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="35" y2="65" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/></svg>
+      <p class="text-xs font-semibold text-center" style="color:var(--ink-black)">Uncle Tan</p>
+      <p class="text-xs text-gray-400 italic text-center leading-tight">opened 2nd<br>kopitiam</p>
     </div>
 
     <!-- Nephew — far left, lower -->
-    <div class="hero-char hidden md:block absolute" style="left:2%;top:78%;">
+    <div class="hero-char char-nephew hidden md:block absolute" style="left:2%;top:78%;">
       <svg width="64" height="82" viewBox="0 0 56 72" fill="none"><circle cx="28" cy="18" r="10" fill="#FFF" stroke="var(--imperial-red)" stroke-width="2"/><circle cx="24" cy="16" r="1.5" fill="var(--ink-black)"/><circle cx="32" cy="16" r="1.5" fill="var(--ink-black)"/><path d="M25 21c1 1.5 5 1.5 6 0" stroke="var(--ink-black)" stroke-width="1.2" stroke-linecap="round"/><polygon points="16,11 28,6 40,11 28,14" fill="var(--ink-black)"/><line x1="28" y1="10" x2="28" y2="6" stroke="var(--ink-black)" stroke-width="1.5"/><line x1="40" y1="11" x2="40" y2="16" stroke="var(--ink-black)" stroke-width="1"/><circle cx="40" cy="17" r="1.5" fill="var(--harvest-gold)"/><line x1="28" y1="28" x2="28" y2="48" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="34" x2="19" y2="42" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="34" x2="37" y2="42" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><rect x="34" y="38" width="8" height="6" rx="1" fill="var(--harvest-gold)" opacity=".6"/><line x1="28" y1="48" x2="21" y2="62" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="48" x2="35" y2="62" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/></svg>
       <p class="text-xs font-semibold text-center" style="color:var(--ink-black)">Nephew</p>
       <p class="text-xs text-gray-400 italic text-center leading-tight">wants WiFi</p>
     </div>
 
     <!-- Uncle & Auntie — far right, upper-mid -->
-    <div class="hero-char hidden md:block absolute" style="right:1%;top:72%;">
+    <div class="hero-char char-couple hidden md:block absolute" style="right:1%;top:72%;">
       <svg width="86" height="88" viewBox="0 0 68 72" fill="none"><circle cx="22" cy="16" r="9" fill="#FFF" stroke="var(--imperial-red)" stroke-width="2"/><circle cx="19" cy="14" r="1.2" fill="var(--ink-black)"/><circle cx="25" cy="14" r="1.2" fill="var(--ink-black)"/><path d="M19 18c1.5 1.5 4.5 1.5 6 0" stroke="var(--ink-black)" stroke-width="1" stroke-linecap="round"/><path d="M13 12c0-7 5-11 9-11s9 4 9 11" stroke="var(--ink-black)" stroke-width="2" fill="none"/><line x1="22" y1="25" x2="22" y2="46" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="22" y1="32" x2="14" y2="40" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><line x1="22" y1="32" x2="30" y2="40" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><line x1="22" y1="46" x2="16" y2="62" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><line x1="22" y1="46" x2="28" y2="62" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><circle cx="46" cy="16" r="9" fill="#FFF" stroke="var(--imperial-red)" stroke-width="2"/><circle cx="43" cy="14" r="1.2" fill="var(--ink-black)"/><circle cx="49" cy="14" r="1.2" fill="var(--ink-black)"/><path d="M43 18c1.5 1.5 4.5 1.5 6 0" stroke="var(--imperial-red)" stroke-width="1" stroke-linecap="round"/><path d="M37 12c-1-7 4-12 9-12s10 5 9 12" stroke="var(--ink-black)" stroke-width="2" fill="none"/><line x1="37" y1="12" x2="36" y2="26" stroke="var(--ink-black)" stroke-width="1.5" stroke-linecap="round"/><line x1="55" y1="12" x2="56" y2="26" stroke="var(--ink-black)" stroke-width="1.5" stroke-linecap="round"/><line x1="46" y1="25" x2="46" y2="46" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="46" y1="32" x2="38" y2="40" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><line x1="46" y1="32" x2="54" y2="40" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><line x1="46" y1="46" x2="40" y2="62" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><line x1="46" y1="46" x2="52" y2="62" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><path d="M32 36c0-2 2-4 3-2s3 0 3 2c0 3-3 5-3 5s-3-2-3-5z" fill="var(--imperial-red)" opacity=".3"/></svg>
       <p class="text-xs font-semibold text-center" style="color:var(--ink-black)">Uncle & Auntie</p>
       <p class="text-xs text-gray-400 italic text-center leading-tight">drove 3 hours</p>
     </div>
 
-    <!-- Cousin — top, slightly left of center -->
-    <div class="hero-char hidden md:block absolute" style="left:22%;top:5%;">
+    <!-- Wei Jie — top, slightly left of center -->
+    <div class="hero-char char-weijie hidden md:block absolute" style="left:22%;top:5%;">
       <svg width="64" height="82" viewBox="0 0 56 72" fill="none"><circle cx="28" cy="16" r="11" fill="#FFF" stroke="var(--imperial-red)" stroke-width="2"/><circle cx="24" cy="14" r="1.5" fill="var(--ink-black)"/><circle cx="32" cy="14" r="1.5" fill="var(--ink-black)"/><path d="M24 19c2 2 6 2 8 0" stroke="var(--ink-black)" stroke-width="1.2" stroke-linecap="round"/><path d="M17 13c0-8 5-13 11-13s11 5 11 13" stroke="var(--ink-black)" stroke-width="2.5" fill="none"/><line x1="28" y1="27" x2="28" y2="50" stroke="var(--imperial-red)" stroke-width="2.5" stroke-linecap="round"/><line x1="28" y1="35" x2="17" y2="42" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="35" x2="40" y2="28" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><circle cx="42" cy="26" r="3" fill="var(--harvest-gold)" opacity=".3"/><line x1="28" y1="50" x2="21" y2="65" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="35" y2="65" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/></svg>
-      <p class="text-xs font-semibold text-center" style="color:var(--ink-black)">Cousin Wei</p>
-      <p class="text-xs text-gray-400 italic text-center leading-tight">back from Bali</p>
+      <p class="text-xs font-semibold text-center" style="color:var(--ink-black)">Wei Jie</p>
+      <p class="text-xs text-gray-400 italic text-center leading-tight">studying abroad</p>
+    </div>
+
+    <!-- Aloysius — right, mid-upper -->
+    <div class="hero-char char-aloysius hidden md:block absolute" style="right:18%;top:18%;">
+      <svg width="64" height="82" viewBox="0 0 56 72" fill="none"><circle cx="28" cy="16" r="11" fill="#FFF" stroke="var(--imperial-red)" stroke-width="2"/><circle cx="24" cy="14" r="1.5" fill="var(--ink-black)"/><circle cx="32" cy="14" r="1.5" fill="var(--ink-black)"/><path d="M25 19c1.5 1.5 4.5 1.5 6 0" stroke="var(--ink-black)" stroke-width="1.2" stroke-linecap="round"/><path d="M17 13c0-8 5-13 11-13s11 5 11 13" stroke="var(--ink-black)" stroke-width="2.5" fill="none"/><rect x="20" y="2" width="16" height="4" rx="2" fill="var(--ink-black)" opacity=".3"/><line x1="28" y1="27" x2="28" y2="50" stroke="var(--imperial-red)" stroke-width="2.5" stroke-linecap="round"/><polygon points="28,28 25,36 28,34 31,36" fill="var(--harvest-gold)" opacity=".6"/><line x1="28" y1="35" x2="18" y2="44" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="35" x2="38" y2="44" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="21" y2="65" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="35" y2="65" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/></svg>
+      <p class="text-xs font-semibold text-center" style="color:var(--ink-black)">Aloysius</p>
+      <p class="text-xs text-gray-400 italic text-center leading-tight">got BTO keys</p>
+    </div>
+
+    <!-- Charmaine — left, mid-lower -->
+    <div class="hero-char char-charmaine hidden md:block absolute" style="left:16%;top:55%;">
+      <svg width="64" height="82" viewBox="0 0 56 72" fill="none"><circle cx="28" cy="16" r="11" fill="#FFF" stroke="var(--imperial-red)" stroke-width="2"/><circle cx="24" cy="14" r="1.5" fill="var(--ink-black)"/><circle cx="32" cy="14" r="1.5" fill="var(--ink-black)"/><path d="M24 19c2 2 6 2 8 0" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><path d="M17 14c0-9 6-14 11-14s11 5 11 14" stroke="var(--ink-black)" stroke-width="2.5" fill="none"/><line x1="17" y1="14" x2="15" y2="28" stroke="var(--ink-black)" stroke-width="2" stroke-linecap="round"/><line x1="39" y1="14" x2="41" y2="28" stroke="var(--ink-black)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="27" x2="28" y2="50" stroke="var(--imperial-red)" stroke-width="2.5" stroke-linecap="round"/><line x1="28" y1="35" x2="18" y2="44" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="35" x2="38" y2="44" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><rect x="36" y="40" width="5" height="8" rx="1" fill="var(--harvest-gold)" opacity=".5"/><line x1="28" y1="50" x2="21" y2="65" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="35" y2="65" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/></svg>
+      <p class="text-xs font-semibold text-center" style="color:var(--ink-black)">Charmaine</p>
+      <p class="text-xs text-gray-400 italic text-center leading-tight">job hunting</p>
+    </div>
+
+    <!-- Jerrold — right, lower-mid -->
+    <div class="hero-char char-jerrold hidden md:block absolute" style="right:3%;top:56%;">
+      <svg width="64" height="82" viewBox="0 0 56 72" fill="none"><circle cx="28" cy="16" r="11" fill="#FFF" stroke="var(--imperial-red)" stroke-width="2"/><circle cx="24" cy="14" r="1.5" fill="var(--ink-black)"/><circle cx="32" cy="14" r="1.5" fill="var(--ink-black)"/><path d="M24 19c2 2 6 2 8 0" stroke="var(--ink-black)" stroke-width="1.2" stroke-linecap="round"/><path d="M18 13c0-7 5-13 10-13s10 6 10 13" stroke="var(--ink-black)" stroke-width="2" fill="none"/><line x1="28" y1="27" x2="28" y2="50" stroke="var(--imperial-red)" stroke-width="2.5" stroke-linecap="round"/><line x1="28" y1="35" x2="18" y2="44" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="35" x2="38" y2="44" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><rect x="35" y="38" width="8" height="6" rx="1" fill="var(--harvest-gold)" opacity=".4"/><line x1="28" y1="50" x2="21" y2="65" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="35" y2="65" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/></svg>
+      <p class="text-xs font-semibold text-center" style="color:var(--ink-black)">Jerrold</p>
+      <p class="text-xs text-gray-400 italic text-center leading-tight">just ORD-ed</p>
+    </div>
+
+    <!-- Ah Gong — top center-right -->
+    <div class="hero-char char-ahma hidden md:block absolute" style="right:26%;top:3%;">
+      <svg width="56" height="70" viewBox="0 0 56 72" fill="none"><circle cx="28" cy="16" r="11" fill="#FFF" stroke="var(--imperial-red)" stroke-width="2"/><circle cx="24" cy="14" r="1.5" fill="var(--ink-black)"/><circle cx="32" cy="14" r="1.5" fill="var(--ink-black)"/><path d="M24 19c2 2 6 2 8 0" stroke="var(--ink-black)" stroke-width="1.2" stroke-linecap="round"/><path d="M19 10c1-5 4-8 9-8s8 3 9 8" stroke="var(--ink-black)" stroke-width="2" fill="none"/><line x1="28" y1="27" x2="28" y2="50" stroke="var(--imperial-red)" stroke-width="2.5" stroke-linecap="round"/><line x1="28" y1="35" x2="18" y2="44" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="35" x2="38" y2="44" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="21" y2="65" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="35" y2="65" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/></svg>
+      <p class="text-xs font-semibold text-center" style="color:var(--ink-black)">Ah Gong</p>
+    </div>
+
+    <!-- Aunty Ophelia -->
+    <div class="hero-char char-lim hidden md:block absolute" style="left:1%;top:35%;">
+      <svg width="56" height="70" viewBox="0 0 56 72" fill="none"><circle cx="28" cy="16" r="11" fill="#FFF" stroke="var(--imperial-red)" stroke-width="2"/><circle cx="24" cy="14" r="1.5" fill="var(--ink-black)"/><circle cx="32" cy="14" r="1.5" fill="var(--ink-black)"/><path d="M24 19c2 2 6 2 8 0" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><path d="M18 13c0-8 5-13 10-13s10 5 10 13" stroke="var(--ink-black)" stroke-width="2" fill="none"/><circle cx="28" cy="4" r="4" fill="var(--ink-black)" opacity=".2"/><line x1="28" y1="27" x2="28" y2="50" stroke="var(--imperial-red)" stroke-width="2.5" stroke-linecap="round"/><line x1="28" y1="35" x2="18" y2="44" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="35" x2="38" y2="44" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="21" y2="65" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="35" y2="65" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/></svg>
+      <p class="text-xs font-semibold text-center" style="color:var(--ink-black)">Aunty Ophelia</p>
+    </div>
+
+    <!-- Partner Zhang -->
+    <div class="hero-char char-charmaine hidden md:block absolute" style="right:1%;top:32%;">
+      <svg width="56" height="70" viewBox="0 0 56 72" fill="none"><circle cx="28" cy="16" r="11" fill="#FFF" stroke="var(--imperial-red)" stroke-width="2"/><circle cx="24" cy="14" r="1.5" fill="var(--ink-black)"/><circle cx="32" cy="14" r="1.5" fill="var(--ink-black)"/><path d="M24 19c2 2 6 2 8 0" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><path d="M17 14c0-9 6-14 11-14s11 5 11 14" stroke="var(--ink-black)" stroke-width="2.5" fill="none"/><line x1="17" y1="14" x2="16" y2="26" stroke="var(--ink-black)" stroke-width="2" stroke-linecap="round"/><line x1="39" y1="14" x2="40" y2="26" stroke="var(--ink-black)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="27" x2="28" y2="50" stroke="var(--imperial-red)" stroke-width="2.5" stroke-linecap="round"/><line x1="28" y1="35" x2="18" y2="44" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="35" x2="38" y2="44" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="21" y2="65" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="35" y2="65" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/></svg>
+      <p class="text-xs font-semibold text-center" style="color:var(--ink-black)">Partner Zhang</p>
+    </div>
+
+    <!-- Little Mei-Mei -->
+    <div class="hero-char char-nephew hidden md:block absolute" style="left:10%;top:22%;">
+      <svg width="50" height="64" viewBox="0 0 56 72" fill="none"><circle cx="28" cy="20" r="10" fill="#FFF" stroke="var(--imperial-red)" stroke-width="2"/><circle cx="24" cy="18" r="2" fill="var(--ink-black)"/><circle cx="32" cy="18" r="2" fill="var(--ink-black)"/><path d="M24 23c2 2.5 6 2.5 8 0" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><path d="M20 14c0-6 4-10 8-10s8 4 8 10" stroke="var(--ink-black)" stroke-width="2" fill="none"/><line x1="28" y1="30" x2="28" y2="48" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="36" x2="20" y2="42" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><line x1="28" y1="36" x2="36" y2="42" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><line x1="28" y1="48" x2="22" y2="60" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><line x1="28" y1="48" x2="34" y2="60" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/></svg>
+      <p class="text-xs font-semibold text-center" style="color:var(--ink-black)">Mei-Mei</p>
+    </div>
+
+    <!-- Uncle Bao -->
+    <div class="hero-char char-uncle-tan hidden md:block absolute" style="right:14%;top:65%;">
+      <svg width="56" height="70" viewBox="0 0 56 72" fill="none"><circle cx="28" cy="16" r="11" fill="#FFF" stroke="var(--imperial-red)" stroke-width="2"/><circle cx="24" cy="14" r="1.5" fill="var(--ink-black)"/><circle cx="32" cy="14" r="1.5" fill="var(--ink-black)"/><path d="M24 19c2 2 6 2 8 0" stroke="var(--ink-black)" stroke-width="1.2" stroke-linecap="round"/><path d="M19 10c1-5 4-8 9-8s8 3 9 8" stroke="var(--ink-black)" stroke-width="2" fill="none"/><line x1="28" y1="27" x2="28" y2="50" stroke="var(--imperial-red)" stroke-width="2.5" stroke-linecap="round"/><line x1="28" y1="35" x2="18" y2="44" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="35" x2="38" y2="44" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="21" y2="65" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="35" y2="65" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/></svg>
+      <p class="text-xs font-semibold text-center" style="color:var(--ink-black)">Uncle Bao</p>
+    </div>
+
+    <!-- Aunty Agnes -->
+    <div class="hero-char char-lim hidden md:block absolute" style="left:18%;top:68%;">
+      <svg width="56" height="70" viewBox="0 0 56 72" fill="none"><circle cx="28" cy="16" r="11" fill="#FFF" stroke="var(--imperial-red)" stroke-width="2"/><circle cx="24" cy="14" r="1.5" fill="var(--ink-black)"/><circle cx="32" cy="14" r="1.5" fill="var(--ink-black)"/><path d="M24 19c2 2 6 2 8 0" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><path d="M18 13c0-8 5-13 10-13s10 5 10 13" stroke="var(--ink-black)" stroke-width="2" fill="none"/><circle cx="28" cy="4" r="4" fill="var(--ink-black)" opacity=".2"/><line x1="28" y1="27" x2="28" y2="50" stroke="var(--imperial-red)" stroke-width="2.5" stroke-linecap="round"/><line x1="28" y1="35" x2="18" y2="44" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="35" x2="38" y2="44" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="21" y2="65" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="35" y2="65" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/></svg>
+      <p class="text-xs font-semibold text-center" style="color:var(--ink-black)">Aunty Agnes</p>
+    </div>
+
+    <!-- Manager Li -->
+    <div class="hero-char char-charmaine hidden md:block absolute" style="left:8%;top:88%;">
+      <svg width="56" height="70" viewBox="0 0 56 72" fill="none"><circle cx="28" cy="16" r="11" fill="#FFF" stroke="var(--imperial-red)" stroke-width="2"/><circle cx="24" cy="14" r="1.5" fill="var(--ink-black)"/><circle cx="32" cy="14" r="1.5" fill="var(--ink-black)"/><path d="M24 19c2 2 6 2 8 0" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><path d="M17 14c0-9 6-14 11-14s11 5 11 14" stroke="var(--ink-black)" stroke-width="2.5" fill="none"/><line x1="17" y1="14" x2="16" y2="26" stroke="var(--ink-black)" stroke-width="2" stroke-linecap="round"/><line x1="39" y1="14" x2="40" y2="26" stroke="var(--ink-black)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="27" x2="28" y2="50" stroke="var(--imperial-red)" stroke-width="2.5" stroke-linecap="round"/><line x1="28" y1="35" x2="18" y2="44" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="35" x2="38" y2="44" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="21" y2="65" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="35" y2="65" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/></svg>
+      <p class="text-xs font-semibold text-center" style="color:var(--ink-black)">Manager Li</p>
+    </div>
+
+    <!-- Second Uncle -->
+    <div class="hero-char char-uncle-tan hidden md:block absolute" style="right:6%;top:86%;">
+      <svg width="56" height="70" viewBox="0 0 56 72" fill="none"><circle cx="28" cy="16" r="11" fill="#FFF" stroke="var(--imperial-red)" stroke-width="2"/><circle cx="24" cy="14" r="1.5" fill="var(--ink-black)"/><circle cx="32" cy="14" r="1.5" fill="var(--ink-black)"/><path d="M24 19c2 2 6 2 8 0" stroke="var(--ink-black)" stroke-width="1.2" stroke-linecap="round"/><path d="M19 10c1-5 4-8 9-8s8 3 9 8" stroke="var(--ink-black)" stroke-width="2" fill="none"/><line x1="28" y1="27" x2="28" y2="50" stroke="var(--imperial-red)" stroke-width="2.5" stroke-linecap="round"/><line x1="28" y1="35" x2="18" y2="44" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="35" x2="38" y2="44" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="21" y2="65" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="35" y2="65" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/></svg>
+      <p class="text-xs font-semibold text-center" style="color:var(--ink-black)">Second Uncle</p>
+    </div>
+
+    <!-- Newlyweds -->
+    <div class="hero-char char-couple hidden md:block absolute" style="left:20%;top:82%;">
+      <svg width="70" height="70" viewBox="0 0 68 72" fill="none"><circle cx="22" cy="16" r="9" fill="#FFF" stroke="var(--imperial-red)" stroke-width="2"/><circle cx="19" cy="14" r="1.2" fill="var(--ink-black)"/><circle cx="25" cy="14" r="1.2" fill="var(--ink-black)"/><path d="M19 18c1.5 1.5 4.5 1.5 6 0" stroke="var(--ink-black)" stroke-width="1" stroke-linecap="round"/><line x1="22" y1="25" x2="22" y2="46" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="22" y1="32" x2="14" y2="40" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><line x1="22" y1="32" x2="30" y2="40" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><line x1="22" y1="46" x2="16" y2="62" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><line x1="22" y1="46" x2="28" y2="62" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><circle cx="46" cy="16" r="9" fill="#FFF" stroke="var(--imperial-red)" stroke-width="2"/><circle cx="43" cy="14" r="1.2" fill="var(--ink-black)"/><circle cx="49" cy="14" r="1.2" fill="var(--ink-black)"/><path d="M43 18c1.5 1.5 4.5 1.5 6 0" stroke="var(--ink-black)" stroke-width="1" stroke-linecap="round"/><line x1="46" y1="25" x2="46" y2="46" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="46" y1="32" x2="38" y2="40" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><line x1="46" y1="32" x2="54" y2="40" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><line x1="46" y1="46" x2="40" y2="62" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><line x1="46" y1="46" x2="52" y2="62" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/></svg>
+      <p class="text-xs font-semibold text-center" style="color:var(--ink-black)">Newlyweds</p>
+    </div>
+
+    <!-- Friend Kai -->
+    <div class="hero-char char-david hidden md:block absolute" style="right:20%;top:80%;">
+      <svg width="56" height="70" viewBox="0 0 56 72" fill="none"><circle cx="28" cy="16" r="11" fill="#FFF" stroke="var(--imperial-red)" stroke-width="2"/><circle cx="24" cy="14" r="1.5" fill="var(--ink-black)"/><circle cx="32" cy="14" r="1.5" fill="var(--ink-black)"/><path d="M24 19c2 2 6 2 8 0" stroke="var(--ink-black)" stroke-width="1.2" stroke-linecap="round"/><path d="M17 13c0-8 5-13 11-13s11 5 11 13" stroke="var(--ink-black)" stroke-width="2.5" fill="none"/><line x1="28" y1="27" x2="28" y2="50" stroke="var(--imperial-red)" stroke-width="2.5" stroke-linecap="round"/><line x1="28" y1="35" x2="18" y2="44" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="35" x2="38" y2="44" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="21" y2="65" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="35" y2="65" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/></svg>
+      <p class="text-xs font-semibold text-center" style="color:var(--ink-black)">Friend Kai</p>
+    </div>
+
+    <!-- WeChat Group -->
+    <div class="hero-char char-couple hidden md:block absolute" style="left:5%;top:62%;">
+      <svg width="60" height="56" viewBox="0 0 80 72" fill="none"><circle cx="20" cy="18" r="9" fill="#FFF" stroke="var(--imperial-red)" stroke-width="2"/><circle cx="17" cy="16" r="1.2" fill="var(--ink-black)"/><circle cx="23" cy="16" r="1.2" fill="var(--ink-black)"/><line x1="20" y1="27" x2="20" y2="46" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="20" y1="33" x2="13" y2="40" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><line x1="20" y1="33" x2="27" y2="40" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><circle cx="40" cy="16" r="9" fill="#FFF" stroke="var(--harvest-gold)" stroke-width="2"/><circle cx="37" cy="14" r="1.2" fill="var(--ink-black)"/><circle cx="43" cy="14" r="1.2" fill="var(--ink-black)"/><line x1="40" y1="25" x2="40" y2="46" stroke="var(--harvest-gold)" stroke-width="2" stroke-linecap="round"/><line x1="40" y1="32" x2="33" y2="40" stroke="var(--harvest-gold)" stroke-width="1.5" stroke-linecap="round"/><line x1="40" y1="32" x2="47" y2="40" stroke="var(--harvest-gold)" stroke-width="1.5" stroke-linecap="round"/><circle cx="60" cy="18" r="9" fill="#FFF" stroke="var(--imperial-red)" stroke-width="2"/><circle cx="57" cy="16" r="1.2" fill="var(--ink-black)"/><circle cx="63" cy="16" r="1.2" fill="var(--ink-black)"/><line x1="60" y1="27" x2="60" y2="46" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="60" y1="33" x2="53" y2="40" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><line x1="60" y1="33" x2="67" y2="40" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/></svg>
+      <p class="text-xs font-semibold text-center" style="color:var(--ink-black)">WeChat Group</p>
+    </div>
+
+    <!-- The Whole Table -->
+    <div class="hero-char char-weijie hidden md:block absolute" style="right:16%;top:4%;">
+      <svg width="60" height="56" viewBox="0 0 80 72" fill="none"><circle cx="20" cy="18" r="9" fill="#FFF" stroke="var(--imperial-red)" stroke-width="2"/><circle cx="17" cy="16" r="1.2" fill="var(--ink-black)"/><circle cx="23" cy="16" r="1.2" fill="var(--ink-black)"/><line x1="20" y1="27" x2="20" y2="46" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><circle cx="40" cy="16" r="9" fill="#FFF" stroke="var(--harvest-gold)" stroke-width="2"/><circle cx="37" cy="14" r="1.2" fill="var(--ink-black)"/><circle cx="43" cy="14" r="1.2" fill="var(--ink-black)"/><line x1="40" y1="25" x2="40" y2="46" stroke="var(--harvest-gold)" stroke-width="2" stroke-linecap="round"/><circle cx="60" cy="18" r="9" fill="#FFF" stroke="var(--imperial-red)" stroke-width="2"/><circle cx="57" cy="16" r="1.2" fill="var(--ink-black)"/><circle cx="63" cy="16" r="1.2" fill="var(--ink-black)"/><line x1="60" y1="27" x2="60" y2="46" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/></svg>
+      <p class="text-xs font-semibold text-center" style="color:var(--ink-black)">Whole Table</p>
+    </div>
+
+    <!-- Cousin Rui -->
+    <div class="hero-char char-david hidden md:block absolute" style="left:14%;top:42%;">
+      <svg width="56" height="70" viewBox="0 0 56 72" fill="none"><circle cx="28" cy="16" r="11" fill="#FFF" stroke="var(--imperial-red)" stroke-width="2"/><circle cx="24" cy="14" r="1.5" fill="var(--ink-black)"/><circle cx="32" cy="14" r="1.5" fill="var(--ink-black)"/><path d="M24 19c2 2 6 2 8 0" stroke="var(--ink-black)" stroke-width="1.2" stroke-linecap="round"/><path d="M17 13c0-8 5-13 11-13s11 5 11 13" stroke="var(--ink-black)" stroke-width="2.5" fill="none"/><line x1="28" y1="27" x2="28" y2="50" stroke="var(--imperial-red)" stroke-width="2.5" stroke-linecap="round"/><line x1="28" y1="35" x2="18" y2="44" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="35" x2="38" y2="44" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="21" y2="65" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="35" y2="65" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/></svg>
+      <p class="text-xs font-semibold text-center" style="color:var(--ink-black)">Cousin Rui</p>
+    </div>
+
+    <!-- Mr. Peterson -->
+    <div class="hero-char char-uncle-tan hidden md:block absolute" style="right:12%;top:42%;">
+      <svg width="56" height="70" viewBox="0 0 56 72" fill="none"><circle cx="28" cy="16" r="11" fill="#FFF" stroke="var(--imperial-red)" stroke-width="2"/><circle cx="24" cy="14" r="1.5" fill="var(--ink-black)"/><circle cx="32" cy="14" r="1.5" fill="var(--ink-black)"/><path d="M23 20c2-2 6-2 8 0" stroke="var(--ink-black)" stroke-width="1.5" stroke-linecap="round"/><line x1="21" y1="10" x2="26" y2="11.5" stroke="var(--ink-black)" stroke-width="1.5" stroke-linecap="round"/><line x1="35" y1="10" x2="30" y2="11.5" stroke="var(--ink-black)" stroke-width="1.5" stroke-linecap="round"/><path d="M17 11c1-7 5-11 11-11s10 4 11 11" stroke="var(--ink-black)" stroke-width="2" fill="none"/><line x1="28" y1="27" x2="28" y2="50" stroke="#8B7D6B" stroke-width="2.5" stroke-linecap="round"/><line x1="28" y1="35" x2="18" y2="44" stroke="#8B7D6B" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="35" x2="38" y2="44" stroke="#8B7D6B" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="21" y2="65" stroke="#8B7D6B" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="35" y2="65" stroke="#8B7D6B" stroke-width="2" stroke-linecap="round"/></svg>
+      <p class="text-xs font-semibold text-center" style="color:var(--ink-black)">Mr. Peterson</p>
+    </div>
+
+    <!-- Joyce Lim -->
+    <div class="hero-char char-jenny hidden md:block absolute" style="right:22%;top:56%;">
+      <svg width="56" height="70" viewBox="0 0 56 72" fill="none"><circle cx="28" cy="14" r="10" fill="#FFF" stroke="var(--imperial-red)" stroke-width="2"/><circle cx="24" cy="12" r="1.5" fill="var(--ink-black)"/><circle cx="32" cy="12" r="1.5" fill="var(--ink-black)"/><path d="M24 17c2 2 6 2 8 0" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><path d="M17 12c0-9 6-14 11-14s11 5 11 14" stroke="var(--ink-black)" stroke-width="2.5" fill="none"/><line x1="28" y1="24" x2="28" y2="46" stroke="var(--imperial-red)" stroke-width="2.5" stroke-linecap="round"/><line x1="28" y1="32" x2="20" y2="38" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="32" x2="36" y2="38" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><ellipse cx="28" cy="42" rx="5" ry="4" fill="var(--harvest-gold)" opacity=".25"/><circle cx="28" cy="40" r="3" fill="#FFF" stroke="var(--imperial-red)" stroke-width="1"/><line x1="28" y1="46" x2="21" y2="62" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="46" x2="35" y2="62" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/></svg>
+      <p class="text-xs font-semibold text-center" style="color:var(--ink-black)">Joyce Lim</p>
+    </div>
+
+    <!-- Uncle Ng -->
+    <div class="hero-char char-uncle-tan hidden md:block absolute" style="left:20%;top:15%;">
+      <svg width="56" height="70" viewBox="0 0 56 72" fill="none"><circle cx="28" cy="16" r="11" fill="#FFF" stroke="var(--imperial-red)" stroke-width="2"/><circle cx="24" cy="14" r="1.5" fill="var(--ink-black)"/><circle cx="32" cy="14" r="1.5" fill="var(--ink-black)"/><path d="M24 19c2 2 6 2 8 0" stroke="var(--ink-black)" stroke-width="1.2" stroke-linecap="round"/><path d="M19 10c1-5 4-8 9-8s8 3 9 8" stroke="var(--ink-black)" stroke-width="2" fill="none"/><line x1="28" y1="27" x2="28" y2="50" stroke="var(--imperial-red)" stroke-width="2.5" stroke-linecap="round"/><path d="M20 30 L36 30 L36 50 L20 50 Z" fill="#FFF" stroke="var(--harvest-gold)" stroke-width="1" opacity=".4"/><line x1="28" y1="35" x2="18" y2="44" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="35" x2="38" y2="44" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="21" y2="65" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="35" y2="65" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/></svg>
+      <p class="text-xs font-semibold text-center" style="color:var(--ink-black)">Uncle Ng</p>
+    </div>
+
+    <!-- Aunty Helen -->
+    <div class="hero-char char-lim hidden md:block absolute" style="right:8%;top:20%;">
+      <svg width="56" height="70" viewBox="0 0 56 72" fill="none"><circle cx="28" cy="16" r="11" fill="#FFF" stroke="var(--imperial-red)" stroke-width="2"/><circle cx="24" cy="14" r="1.5" fill="var(--ink-black)"/><circle cx="32" cy="14" r="1.5" fill="var(--ink-black)"/><path d="M24 19c2 2 6 2 8 0" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><path d="M16 14c0-10 6-15 12-15s12 5 12 15" stroke="var(--ink-black)" stroke-width="2.5" fill="none"/><line x1="16" y1="14" x2="14" y2="28" stroke="var(--ink-black)" stroke-width="2" stroke-linecap="round"/><line x1="40" y1="14" x2="42" y2="28" stroke="var(--ink-black)" stroke-width="2" stroke-linecap="round"/><circle cx="28" cy="3" r="2" fill="var(--harvest-gold)" opacity=".6"/><line x1="28" y1="27" x2="28" y2="50" stroke="var(--imperial-red)" stroke-width="2.5" stroke-linecap="round"/><line x1="28" y1="35" x2="18" y2="44" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="35" x2="38" y2="44" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="21" y2="65" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="35" y2="65" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/></svg>
+      <p class="text-xs font-semibold text-center" style="color:var(--ink-black)">Aunty Helen</p>
+    </div>
+
+    <!-- Marcus Koh -->
+    <div class="hero-char char-nephew hidden md:block absolute" style="left:22%;top:32%;">
+      <svg width="50" height="64" viewBox="0 0 56 72" fill="none"><circle cx="28" cy="20" r="10" fill="#FFF" stroke="var(--imperial-red)" stroke-width="2"/><circle cx="24" cy="18" r="1.5" fill="var(--ink-black)"/><circle cx="32" cy="18" r="1.5" fill="var(--ink-black)"/><path d="M25 23c1 1.5 5 1.5 6 0" stroke="var(--ink-black)" stroke-width="1.2" stroke-linecap="round"/><path d="M20 14c0-6 4-10 8-10s8 4 8 10" stroke="var(--ink-black)" stroke-width="2" fill="none"/><line x1="28" y1="30" x2="28" y2="48" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="36" x2="20" y2="42" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><line x1="28" y1="36" x2="36" y2="42" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><rect x="33" y="38" width="7" height="5" rx="1" fill="var(--harvest-gold)" opacity=".5"/><line x1="28" y1="48" x2="22" y2="60" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><line x1="28" y1="48" x2="34" y2="60" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/></svg>
+      <p class="text-xs font-semibold text-center" style="color:var(--ink-black)">Marcus Koh</p>
+    </div>
+
+    <!-- Vincent & Karen -->
+    <div class="hero-char char-couple hidden md:block absolute" style="right:18%;top:74%;">
+      <svg width="70" height="70" viewBox="0 0 68 72" fill="none"><circle cx="22" cy="16" r="9" fill="#FFF" stroke="var(--imperial-red)" stroke-width="2"/><circle cx="19" cy="14" r="1.2" fill="var(--ink-black)"/><circle cx="25" cy="14" r="1.2" fill="var(--ink-black)"/><path d="M19 18c1.5 1.5 4.5 1.5 6 0" stroke="var(--ink-black)" stroke-width="1" stroke-linecap="round"/><line x1="22" y1="25" x2="22" y2="46" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="22" y1="32" x2="14" y2="40" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><line x1="22" y1="32" x2="30" y2="40" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><line x1="22" y1="46" x2="16" y2="62" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><line x1="22" y1="46" x2="28" y2="62" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><circle cx="46" cy="16" r="9" fill="#FFF" stroke="var(--imperial-red)" stroke-width="2"/><circle cx="43" cy="14" r="1.2" fill="var(--ink-black)"/><circle cx="49" cy="14" r="1.2" fill="var(--ink-black)"/><path d="M43 18c1.5 1.5 4.5 1.5 6 0" stroke="var(--ink-black)" stroke-width="1" stroke-linecap="round"/><line x1="46" y1="25" x2="46" y2="46" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="46" y1="32" x2="38" y2="40" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><line x1="46" y1="32" x2="54" y2="40" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><line x1="46" y1="46" x2="40" y2="62" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><line x1="46" y1="46" x2="52" y2="62" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><circle cx="52" cy="38" r="2" fill="var(--harvest-gold)" opacity=".6"/></svg>
+      <p class="text-xs font-semibold text-center" style="color:var(--ink-black)">Vincent & Karen</p>
+    </div>
+
+    <!-- Uncle Stephen -->
+    <div class="hero-char char-david hidden md:block absolute" style="left:3%;top:92%;">
+      <svg width="56" height="70" viewBox="0 0 56 72" fill="none"><circle cx="28" cy="16" r="11" fill="#FFF" stroke="var(--imperial-red)" stroke-width="2"/><circle cx="24" cy="14" r="1.5" fill="var(--ink-black)"/><circle cx="32" cy="14" r="1.5" fill="var(--ink-black)"/><path d="M24 19c2 2 6 2 8 0" stroke="var(--ink-black)" stroke-width="1.2" stroke-linecap="round"/><path d="M19 10c1-5 4-8 9-8s8 3 9 8" stroke="var(--ink-black)" stroke-width="2" fill="none"/><line x1="28" y1="27" x2="28" y2="50" stroke="var(--imperial-red)" stroke-width="3" stroke-linecap="round"/><line x1="28" y1="34" x2="16" y2="42" stroke="var(--imperial-red)" stroke-width="2.5" stroke-linecap="round"/><line x1="28" y1="34" x2="40" y2="42" stroke="var(--imperial-red)" stroke-width="2.5" stroke-linecap="round"/><line x1="16" y1="42" x2="14" y2="38" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="40" y1="42" x2="42" y2="38" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><circle cx="28" cy="26" r="3.5" fill="var(--harvest-gold)" opacity=".5"/><line x1="28" y1="50" x2="20" y2="65" stroke="var(--imperial-red)" stroke-width="2.5" stroke-linecap="round"/><line x1="28" y1="50" x2="36" y2="65" stroke="var(--imperial-red)" stroke-width="2.5" stroke-linecap="round"/></svg>
+      <p class="text-xs font-semibold text-center" style="color:var(--ink-black)">Uncle Stephen</p>
     </div>
 
     <!-- === Center content === -->
@@ -161,10 +365,15 @@
       </div>
       <h1 class="gallop-in font-cn text-4xl sm:text-5xl md:text-7xl font-bold mb-3" style="animation-delay:.1s;color:var(--ink-black)">马到成功</h1>
       <p class="gallop-in text-base sm:text-lg md:text-xl mb-2 font-light tracking-wide" style="animation-delay:.2s;color:var(--imperial-red)">Mǎ dào chéng gōng</p>
-      <p class="gallop-in text-sm sm:text-base text-gray-500 mb-8 max-w-md mx-auto px-2" style="animation-delay:.3s">"Success upon the horse's arrival" — May achievement gallop swiftly to you in 2026.</p>
+      <p class="gallop-in text-sm sm:text-base text-gray-500 mb-4 max-w-md mx-auto px-2" style="animation-delay:.3s">"Success upon the horse's arrival" — May achievement gallop swiftly to you in 2026.</p>
+
+      <!-- Hero horse illustration -->
+      <div class="gallop-in horse-bob mb-4" style="animation-delay:.35s">
+        <img src="horse.png" alt="Year of the Horse 2026" class="mx-auto w-40 sm:w-48 md:w-56" />
+      </div>
 
       <!-- Mission card -->
-      <div class="gallop-up bg-white rounded-2xl shadow-lg px-6 sm:px-8 py-6 max-w-md w-full" style="animation-delay:.5s">
+      <div class="gallop-up bg-white rounded-2xl shadow-lg px-6 sm:px-8 py-6 max-w-md w-full ornate-card" style="animation-delay:.5s">
         <p class="text-xs font-semibold tracking-widest uppercase mb-3" style="color:var(--harvest-gold)">Your Mission</p>
         <p class="text-sm text-gray-600 leading-relaxed">The annual interrogation — <em>er</em>, reunion — begins. You've just walked through the door and the guests are eyeing you expectantly. <strong>What do you say!?</strong></p>
       </div>
@@ -172,51 +381,166 @@
       <!-- Mobile-only character grid (SVGs) -->
       <div class="md:hidden mt-6 w-full">
         <p class="text-xs font-semibold tracking-widest uppercase mb-4" style="color:var(--harvest-gold)">Meet the Guests</p>
-        <div class="grid grid-cols-3 gap-4 max-w-sm mx-auto">
-          <!-- Grandma -->
-          <div class="text-center">
+        <div class="mobile-guests grid grid-cols-5 gap-2 max-w-md mx-auto">
+          <!-- Ah Ma -->
+          <div class="text-center char-ahma">
             <svg class="mx-auto" width="48" height="60" viewBox="0 0 56 72" fill="none"><circle cx="28" cy="16" r="11" fill="#FFF" stroke="var(--imperial-red)" stroke-width="2"/><circle cx="23" cy="14" r="1.5" fill="var(--ink-black)"/><circle cx="33" cy="14" r="1.5" fill="var(--ink-black)"/><path d="M24 19c2 2 6 2 8 0" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><circle cx="23" cy="14" r="4" stroke="var(--harvest-gold)" stroke-width="1" fill="none"/><circle cx="33" cy="14" r="4" stroke="var(--harvest-gold)" stroke-width="1" fill="none"/><line x1="27" y1="14" x2="29" y2="14" stroke="var(--harvest-gold)" stroke-width="1"/><line x1="28" y1="27" x2="28" y2="50" stroke="var(--imperial-red)" stroke-width="2.5" stroke-linecap="round"/><line x1="28" y1="35" x2="18" y2="44" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="35" x2="38" y2="44" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="20" y2="65" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="36" y2="65" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="38" y1="44" x2="42" y2="64" stroke="var(--harvest-gold)" stroke-width="1.5" stroke-linecap="round"/></svg>
-            <p class="text-xs font-semibold mt-1">Grandma</p><p class="text-xs text-gray-400 italic leading-tight">marriage?</p>
+            <p class="text-xs font-semibold mt-1">Ah Ma</p><p class="text-xs text-gray-400 italic leading-tight">marriage?</p>
           </div>
-          <!-- Boss Chen -->
-          <div class="text-center">
+          <!-- Boon Huat -->
+          <div class="text-center char-boonhuat">
             <svg class="mx-auto" width="48" height="60" viewBox="0 0 56 72" fill="none"><circle cx="28" cy="16" r="11" fill="#FFF" stroke="var(--imperial-red)" stroke-width="2"/><circle cx="24" cy="14" r="1.5" fill="var(--ink-black)"/><circle cx="32" cy="14" r="1.5" fill="var(--ink-black)"/><path d="M25 19c1.5 1.5 4.5 1.5 6 0" stroke="var(--ink-black)" stroke-width="1.2" stroke-linecap="round"/><path d="M17 12c0-8 8-13 15-11 5 1.5 7 5 7 8" stroke="var(--ink-black)" stroke-width="2" fill="none" stroke-linecap="round"/><line x1="28" y1="27" x2="28" y2="50" stroke="var(--ink-black)" stroke-width="2.5" stroke-linecap="round"/><polygon points="28,28 25,38 28,36 31,38" fill="var(--imperial-red)"/><line x1="28" y1="35" x2="18" y2="43" stroke="var(--ink-black)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="35" x2="38" y2="43" stroke="var(--ink-black)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="21" y2="65" stroke="var(--ink-black)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="35" y2="65" stroke="var(--ink-black)" stroke-width="2" stroke-linecap="round"/></svg>
-            <p class="text-xs font-semibold mt-1">Boss Chen</p><p class="text-xs text-gray-400 italic leading-tight">mom's friend</p>
+            <p class="text-xs font-semibold mt-1">Boon Huat</p><p class="text-xs text-gray-400 italic leading-tight">startup bro</p>
           </div>
           <!-- Nephew -->
-          <div class="text-center">
+          <div class="text-center char-nephew">
             <svg class="mx-auto" width="48" height="60" viewBox="0 0 56 72" fill="none"><circle cx="28" cy="18" r="10" fill="#FFF" stroke="var(--imperial-red)" stroke-width="2"/><circle cx="24" cy="16" r="1.5" fill="var(--ink-black)"/><circle cx="32" cy="16" r="1.5" fill="var(--ink-black)"/><path d="M25 21c1 1.5 5 1.5 6 0" stroke="var(--ink-black)" stroke-width="1.2" stroke-linecap="round"/><polygon points="16,11 28,6 40,11 28,14" fill="var(--ink-black)"/><line x1="28" y1="10" x2="28" y2="6" stroke="var(--ink-black)" stroke-width="1.5"/><line x1="28" y1="28" x2="28" y2="48" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="34" x2="19" y2="42" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="34" x2="37" y2="42" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="48" x2="21" y2="62" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="48" x2="35" y2="62" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/></svg>
             <p class="text-xs font-semibold mt-1">Nephew</p><p class="text-xs text-gray-400 italic leading-tight">wants WiFi</p>
           </div>
           <!-- David -->
-          <div class="text-center">
+          <div class="text-center char-david">
             <svg class="mx-auto" width="48" height="60" viewBox="0 0 56 72" fill="none"><circle cx="28" cy="16" r="11" fill="#FFF" stroke="var(--imperial-red)" stroke-width="2"/><circle cx="24" cy="14" r="1.5" fill="var(--ink-black)"/><circle cx="32" cy="14" r="1.5" fill="var(--ink-black)"/><path d="M24 19c2 2 6 2 8 0" stroke="var(--ink-black)" stroke-width="1.2" stroke-linecap="round"/><ellipse cx="28" cy="7" rx="8" ry="3.5" fill="var(--harvest-gold)" opacity=".7"/><polygon points="28,3 26,7 30,7" fill="none" stroke="#fff" stroke-width=".7"/><polygon points="28,8 26,4 30,4" fill="none" stroke="#fff" stroke-width=".7"/><line x1="28" y1="27" x2="28" y2="50" stroke="var(--imperial-red)" stroke-width="2.5" stroke-linecap="round"/><line x1="28" y1="35" x2="18" y2="44" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="35" x2="38" y2="44" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="21" y2="65" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="35" y2="65" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/></svg>
-            <p class="text-xs font-semibold mt-1">David</p><p class="text-xs text-gray-400 italic leading-tight">the dumplings</p>
+            <p class="text-xs font-semibold mt-1">David W.</p><p class="text-xs text-gray-400 italic leading-tight">the dumplings</p>
           </div>
           <!-- Jenny -->
-          <div class="text-center">
+          <div class="text-center char-jenny">
             <svg class="mx-auto" width="48" height="60" viewBox="0 0 56 72" fill="none"><circle cx="28" cy="16" r="11" fill="#FFF" stroke="var(--imperial-red)" stroke-width="2"/><circle cx="24" cy="14" r="1.5" fill="var(--ink-black)"/><circle cx="32" cy="14" r="1.5" fill="var(--ink-black)"/><path d="M24 19c2 2 6 2 8 0" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><path d="M17 14c0-9 6-14 11-14s11 5 11 14" stroke="var(--ink-black)" stroke-width="2.5" fill="none"/><line x1="17" y1="14" x2="15" y2="30" stroke="var(--ink-black)" stroke-width="2" stroke-linecap="round"/><line x1="39" y1="14" x2="41" y2="30" stroke="var(--ink-black)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="27" x2="28" y2="50" stroke="var(--imperial-red)" stroke-width="2.5" stroke-linecap="round"/><line x1="28" y1="35" x2="18" y2="44" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="35" x2="38" y2="44" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="21" y2="65" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="35" y2="65" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/></svg>
             <p class="text-xs font-semibold mt-1">Jenny</p><p class="text-xs text-gray-400 italic leading-tight">finding roots</p>
           </div>
-          <!-- Mrs. Lau -->
-          <div class="text-center">
+          <!-- Aunty Lim -->
+          <div class="text-center char-lim">
             <svg class="mx-auto" width="48" height="60" viewBox="0 0 56 72" fill="none"><circle cx="28" cy="16" r="11" fill="#FFF" stroke="var(--imperial-red)" stroke-width="2"/><circle cx="24" cy="14" r="1.5" fill="var(--ink-black)"/><circle cx="32" cy="14" r="1.5" fill="var(--ink-black)"/><path d="M24 19c2 2 6 2 8 0" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><path d="M19 11c-1-7 5-12 9-12s10 5 9 12" stroke="var(--ink-black)" stroke-width="2" fill="none"/><line x1="28" y1="27" x2="28" y2="50" stroke="var(--imperial-red)" stroke-width="2.5" stroke-linecap="round"/><path d="M21 32 L35 32 L33 50 L23 50 Z" fill="var(--harvest-gold)" opacity=".2" stroke="var(--harvest-gold)" stroke-width="1"/><line x1="28" y1="35" x2="18" y2="44" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="35" x2="38" y2="44" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="38" y1="44" x2="44" y2="36" stroke="#16a34a" stroke-width="2" stroke-linecap="round"/><line x1="44" y1="36" x2="46" y2="32" stroke="#16a34a" stroke-width="1.5" stroke-linecap="round"/><line x1="28" y1="50" x2="21" y2="65" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="35" y2="65" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/></svg>
-            <p class="text-xs font-semibold mt-1">Mrs. Lau</p><p class="text-xs text-gray-400 italic leading-tight">knows all</p>
+            <p class="text-xs font-semibold mt-1">Aunty Lim</p><p class="text-xs text-gray-400 italic leading-tight">knows all</p>
           </div>
-          <!-- Mr. Peterson -->
-          <div class="text-center">
-            <svg class="mx-auto" width="48" height="60" viewBox="0 0 56 72" fill="none"><circle cx="28" cy="16" r="11" fill="#FFF" stroke="var(--imperial-red)" stroke-width="2"/><circle cx="24" cy="14" r="1.5" fill="var(--ink-black)"/><circle cx="32" cy="14" r="1.5" fill="var(--ink-black)"/><path d="M23 20c2-2 6-2 8 0" stroke="var(--ink-black)" stroke-width="1.5" stroke-linecap="round"/><line x1="21" y1="10" x2="26" y2="11.5" stroke="var(--ink-black)" stroke-width="1.5" stroke-linecap="round"/><line x1="35" y1="10" x2="30" y2="11.5" stroke="var(--ink-black)" stroke-width="1.5" stroke-linecap="round"/><line x1="28" y1="27" x2="28" y2="50" stroke="#8B7D6B" stroke-width="2.5" stroke-linecap="round"/><path d="M22 28 L28 38 L34 28" stroke="#8B7D6B" stroke-width="1.5" fill="none" stroke-linecap="round"/><line x1="18" y1="36" x2="38" y2="36" stroke="#8B7D6B" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="21" y2="63" stroke="#8B7D6B" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="35" y2="63" stroke="#8B7D6B" stroke-width="2" stroke-linecap="round"/></svg>
-            <p class="text-xs font-semibold mt-1">Peterson</p><p class="text-xs text-gray-400 italic leading-tight">smells fish</p>
+          <!-- Uncle Tan -->
+          <div class="text-center char-uncle-tan">
+            <svg class="mx-auto" width="48" height="60" viewBox="0 0 56 72" fill="none"><circle cx="28" cy="16" r="11" fill="#FFF" stroke="var(--imperial-red)" stroke-width="2"/><circle cx="24" cy="14" r="1.5" fill="var(--ink-black)"/><circle cx="32" cy="14" r="1.5" fill="var(--ink-black)"/><path d="M25 19c1.5 1.5 4.5 1.5 6 0" stroke="var(--ink-black)" stroke-width="1.2" stroke-linecap="round"/><path d="M18 12c0-7 5-12 10-12s10 5 10 12" stroke="var(--ink-black)" stroke-width="2" fill="none"/><line x1="28" y1="27" x2="28" y2="50" stroke="var(--imperial-red)" stroke-width="2.5" stroke-linecap="round"/><line x1="28" y1="35" x2="18" y2="44" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="35" x2="38" y2="44" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="21" y2="65" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="35" y2="65" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/></svg>
+            <p class="text-xs font-semibold mt-1">Uncle Tan</p><p class="text-xs text-gray-400 italic leading-tight">2nd kopitiam</p>
           </div>
-          <!-- Cousin Wei -->
-          <div class="text-center">
+          <!-- Wei Jie -->
+          <div class="text-center char-weijie">
             <svg class="mx-auto" width="48" height="60" viewBox="0 0 56 72" fill="none"><circle cx="28" cy="16" r="11" fill="#FFF" stroke="var(--imperial-red)" stroke-width="2"/><circle cx="24" cy="14" r="1.5" fill="var(--ink-black)"/><circle cx="32" cy="14" r="1.5" fill="var(--ink-black)"/><path d="M24 19c2 2 6 2 8 0" stroke="var(--ink-black)" stroke-width="1.2" stroke-linecap="round"/><path d="M17 13c0-8 5-13 11-13s11 5 11 13" stroke="var(--ink-black)" stroke-width="2.5" fill="none"/><line x1="28" y1="27" x2="28" y2="50" stroke="var(--imperial-red)" stroke-width="2.5" stroke-linecap="round"/><line x1="28" y1="35" x2="17" y2="42" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="35" x2="40" y2="28" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="21" y2="65" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="35" y2="65" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/></svg>
-            <p class="text-xs font-semibold mt-1">Cousin Wei</p><p class="text-xs text-gray-400 italic leading-tight">Bali tan</p>
+            <p class="text-xs font-semibold mt-1">Wei Jie</p><p class="text-xs text-gray-400 italic leading-tight">studying abroad</p>
+          </div>
+          <!-- Aloysius -->
+          <div class="text-center char-aloysius">
+            <svg class="mx-auto" width="48" height="60" viewBox="0 0 56 72" fill="none"><circle cx="28" cy="16" r="11" fill="#FFF" stroke="var(--imperial-red)" stroke-width="2"/><circle cx="24" cy="14" r="1.5" fill="var(--ink-black)"/><circle cx="32" cy="14" r="1.5" fill="var(--ink-black)"/><path d="M25 19c1.5 1.5 4.5 1.5 6 0" stroke="var(--ink-black)" stroke-width="1.2" stroke-linecap="round"/><path d="M17 13c0-8 5-13 11-13s11 5 11 13" stroke="var(--ink-black)" stroke-width="2.5" fill="none"/><rect x="20" y="2" width="16" height="4" rx="2" fill="var(--ink-black)" opacity=".3"/><line x1="28" y1="27" x2="28" y2="50" stroke="var(--imperial-red)" stroke-width="2.5" stroke-linecap="round"/><polygon points="28,28 25,36 28,34 31,36" fill="var(--harvest-gold)" opacity=".6"/><line x1="28" y1="35" x2="18" y2="44" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="35" x2="38" y2="44" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="21" y2="65" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="35" y2="65" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/></svg>
+            <p class="text-xs font-semibold mt-1">Aloysius</p><p class="text-xs text-gray-400 italic leading-tight">got BTO keys</p>
+          </div>
+          <!-- Charmaine -->
+          <div class="text-center char-charmaine">
+            <svg class="mx-auto" width="48" height="60" viewBox="0 0 56 72" fill="none"><circle cx="28" cy="16" r="11" fill="#FFF" stroke="var(--imperial-red)" stroke-width="2"/><circle cx="24" cy="14" r="1.5" fill="var(--ink-black)"/><circle cx="32" cy="14" r="1.5" fill="var(--ink-black)"/><path d="M24 19c2 2 6 2 8 0" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><path d="M17 14c0-9 6-14 11-14s11 5 11 14" stroke="var(--ink-black)" stroke-width="2.5" fill="none"/><line x1="17" y1="14" x2="15" y2="28" stroke="var(--ink-black)" stroke-width="2" stroke-linecap="round"/><line x1="39" y1="14" x2="41" y2="28" stroke="var(--ink-black)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="27" x2="28" y2="50" stroke="var(--imperial-red)" stroke-width="2.5" stroke-linecap="round"/><line x1="28" y1="35" x2="18" y2="44" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="35" x2="38" y2="44" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><rect x="36" y="40" width="5" height="8" rx="1" fill="var(--harvest-gold)" opacity=".5"/><line x1="28" y1="50" x2="21" y2="65" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="35" y2="65" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/></svg>
+            <p class="text-xs font-semibold mt-1">Charmaine</p><p class="text-xs text-gray-400 italic leading-tight">job hunting</p>
+          </div>
+          <!-- Jerrold -->
+          <div class="text-center char-jerrold">
+            <svg class="mx-auto" width="48" height="60" viewBox="0 0 56 72" fill="none"><circle cx="28" cy="16" r="11" fill="#FFF" stroke="var(--imperial-red)" stroke-width="2"/><circle cx="24" cy="14" r="1.5" fill="var(--ink-black)"/><circle cx="32" cy="14" r="1.5" fill="var(--ink-black)"/><path d="M24 19c2 2 6 2 8 0" stroke="var(--ink-black)" stroke-width="1.2" stroke-linecap="round"/><path d="M18 13c0-7 5-13 10-13s10 6 10 13" stroke="var(--ink-black)" stroke-width="2" fill="none"/><line x1="28" y1="27" x2="28" y2="50" stroke="var(--imperial-red)" stroke-width="2.5" stroke-linecap="round"/><line x1="28" y1="35" x2="18" y2="44" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="35" x2="38" y2="44" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><rect x="35" y="38" width="8" height="6" rx="1" fill="var(--harvest-gold)" opacity=".4"/><line x1="28" y1="50" x2="21" y2="65" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="35" y2="65" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/></svg>
+            <p class="text-xs font-semibold mt-1">Jerrold</p><p class="text-xs text-gray-400 italic leading-tight">just ORD-ed</p>
           </div>
           <!-- Uncle & Auntie -->
-          <div class="text-center">
+          <div class="text-center char-couple">
             <svg class="mx-auto" width="58" height="60" viewBox="0 0 68 72" fill="none"><circle cx="22" cy="16" r="9" fill="#FFF" stroke="var(--imperial-red)" stroke-width="2"/><circle cx="19" cy="14" r="1.2" fill="var(--ink-black)"/><circle cx="25" cy="14" r="1.2" fill="var(--ink-black)"/><path d="M19 18c1.5 1.5 4.5 1.5 6 0" stroke="var(--ink-black)" stroke-width="1" stroke-linecap="round"/><line x1="22" y1="25" x2="22" y2="46" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="22" y1="32" x2="14" y2="40" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><line x1="22" y1="32" x2="30" y2="40" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><line x1="22" y1="46" x2="16" y2="62" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><line x1="22" y1="46" x2="28" y2="62" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><circle cx="46" cy="16" r="9" fill="#FFF" stroke="var(--imperial-red)" stroke-width="2"/><circle cx="43" cy="14" r="1.2" fill="var(--ink-black)"/><circle cx="49" cy="14" r="1.2" fill="var(--ink-black)"/><path d="M43 18c1.5 1.5 4.5 1.5 6 0" stroke="var(--imperial-red)" stroke-width="1" stroke-linecap="round"/><line x1="46" y1="25" x2="46" y2="46" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="46" y1="32" x2="38" y2="40" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><line x1="46" y1="32" x2="54" y2="40" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><line x1="46" y1="46" x2="40" y2="62" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><line x1="46" y1="46" x2="52" y2="62" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><path d="M32 36c0-2 2-4 3-2s3 0 3 2c0 3-3 5-3 5s-3-2-3-5z" fill="var(--imperial-red)" opacity=".3"/></svg>
             <p class="text-xs font-semibold mt-1">Uncle & Auntie</p><p class="text-xs text-gray-400 italic leading-tight">3hr drive</p>
+          </div>
+          <!-- Ah Gong -->
+          <div class="text-center char-uncle-tan">
+            <svg class="mx-auto" width="40" height="52" viewBox="0 0 56 72" fill="none"><circle cx="28" cy="16" r="11" fill="#FFF" stroke="var(--imperial-red)" stroke-width="2"/><circle cx="24" cy="14" r="1.5" fill="var(--ink-black)"/><circle cx="32" cy="14" r="1.5" fill="var(--ink-black)"/><path d="M24 19c2 2 6 2 8 0" stroke="var(--ink-black)" stroke-width="1.2" stroke-linecap="round"/><path d="M19 10c1-5 4-8 9-8s8 3 9 8" stroke="var(--ink-black)" stroke-width="2" fill="none"/><line x1="28" y1="27" x2="28" y2="50" stroke="var(--imperial-red)" stroke-width="2.5" stroke-linecap="round"/><line x1="28" y1="35" x2="18" y2="44" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="35" x2="38" y2="44" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="21" y2="65" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="35" y2="65" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/></svg>
+            <p class="text-xs font-semibold mt-1">Ah Gong</p><p class="text-xs text-gray-400 italic leading-tight">red packets</p>
+          </div>
+          <!-- Aunty Ophelia -->
+          <div class="text-center char-lim">
+            <svg class="mx-auto" width="40" height="52" viewBox="0 0 56 72" fill="none"><circle cx="28" cy="16" r="11" fill="#FFF" stroke="var(--imperial-red)" stroke-width="2"/><circle cx="24" cy="14" r="1.5" fill="var(--ink-black)"/><circle cx="32" cy="14" r="1.5" fill="var(--ink-black)"/><path d="M24 19c2 2 6 2 8 0" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><path d="M18 13c0-8 5-13 10-13s10 5 10 13" stroke="var(--ink-black)" stroke-width="2" fill="none"/><circle cx="28" cy="4" r="4" fill="var(--ink-black)" opacity=".2"/><line x1="28" y1="27" x2="28" y2="50" stroke="var(--imperial-red)" stroke-width="2.5" stroke-linecap="round"/><line x1="28" y1="35" x2="18" y2="44" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="35" x2="38" y2="44" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="21" y2="65" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="35" y2="65" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/></svg>
+            <p class="text-xs font-semibold mt-1">Aunty Ophelia</p><p class="text-xs text-gray-400 italic leading-tight">the weight</p>
+          </div>
+          <!-- Partner Zhang -->
+          <div class="text-center char-charmaine">
+            <svg class="mx-auto" width="40" height="52" viewBox="0 0 56 72" fill="none"><circle cx="28" cy="16" r="11" fill="#FFF" stroke="var(--imperial-red)" stroke-width="2"/><circle cx="24" cy="14" r="1.5" fill="var(--ink-black)"/><circle cx="32" cy="14" r="1.5" fill="var(--ink-black)"/><path d="M24 19c2 2 6 2 8 0" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><path d="M17 14c0-9 6-14 11-14s11 5 11 14" stroke="var(--ink-black)" stroke-width="2.5" fill="none"/><line x1="28" y1="27" x2="28" y2="50" stroke="var(--imperial-red)" stroke-width="2.5" stroke-linecap="round"/><line x1="28" y1="35" x2="18" y2="44" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="35" x2="38" y2="44" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="21" y2="65" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="35" y2="65" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/></svg>
+            <p class="text-xs font-semibold mt-1">P. Zhang</p><p class="text-xs text-gray-400 italic leading-tight">your age?</p>
+          </div>
+          <!-- Little Mei-Mei -->
+          <div class="text-center char-nephew">
+            <svg class="mx-auto" width="40" height="52" viewBox="0 0 56 72" fill="none"><circle cx="28" cy="20" r="10" fill="#FFF" stroke="var(--imperial-red)" stroke-width="2"/><circle cx="24" cy="18" r="2" fill="var(--ink-black)"/><circle cx="32" cy="18" r="2" fill="var(--ink-black)"/><path d="M24 23c2 2.5 6 2.5 8 0" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><path d="M20 14c0-6 4-10 8-10s8 4 8 10" stroke="var(--ink-black)" stroke-width="2" fill="none"/><line x1="28" y1="30" x2="28" y2="48" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="36" x2="20" y2="42" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><line x1="28" y1="36" x2="36" y2="42" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><line x1="28" y1="48" x2="22" y2="60" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><line x1="28" y1="48" x2="34" y2="60" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <p class="text-xs font-semibold mt-1">Mei-Mei</p><p class="text-xs text-gray-400 italic leading-tight">so cute!</p>
+          </div>
+          <!-- Uncle Bao -->
+          <div class="text-center char-uncle-tan">
+            <svg class="mx-auto" width="40" height="52" viewBox="0 0 56 72" fill="none"><circle cx="28" cy="16" r="11" fill="#FFF" stroke="var(--imperial-red)" stroke-width="2"/><circle cx="24" cy="14" r="1.5" fill="var(--ink-black)"/><circle cx="32" cy="14" r="1.5" fill="var(--ink-black)"/><path d="M24 19c2 2 6 2 8 0" stroke="var(--ink-black)" stroke-width="1.2" stroke-linecap="round"/><path d="M19 10c1-5 4-8 9-8s8 3 9 8" stroke="var(--ink-black)" stroke-width="2" fill="none"/><line x1="28" y1="27" x2="28" y2="50" stroke="var(--imperial-red)" stroke-width="2.5" stroke-linecap="round"/><line x1="28" y1="35" x2="18" y2="44" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="35" x2="38" y2="44" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="21" y2="65" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="35" y2="65" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/></svg>
+            <p class="text-xs font-semibold mt-1">Uncle Bao</p><p class="text-xs text-gray-400 italic leading-tight">crypto bro</p>
+          </div>
+          <!-- Aunty Agnes -->
+          <div class="text-center char-lim">
+            <svg class="mx-auto" width="40" height="52" viewBox="0 0 56 72" fill="none"><circle cx="28" cy="16" r="11" fill="#FFF" stroke="var(--imperial-red)" stroke-width="2"/><circle cx="24" cy="14" r="1.5" fill="var(--ink-black)"/><circle cx="32" cy="14" r="1.5" fill="var(--ink-black)"/><path d="M24 19c2 2 6 2 8 0" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><path d="M18 13c0-8 5-13 10-13s10 5 10 13" stroke="var(--ink-black)" stroke-width="2" fill="none"/><circle cx="28" cy="4" r="4" fill="var(--ink-black)" opacity=".2"/><line x1="28" y1="27" x2="28" y2="50" stroke="var(--imperial-red)" stroke-width="2.5" stroke-linecap="round"/><line x1="28" y1="35" x2="18" y2="44" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="35" x2="38" y2="44" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="21" y2="65" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="35" y2="65" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/></svg>
+            <p class="text-xs font-semibold mt-1">Aunty Agnes</p><p class="text-xs text-gray-400 italic leading-tight">kids when?</p>
+          </div>
+          <!-- Manager Li -->
+          <div class="text-center char-charmaine">
+            <svg class="mx-auto" width="40" height="52" viewBox="0 0 56 72" fill="none"><circle cx="28" cy="16" r="11" fill="#FFF" stroke="var(--imperial-red)" stroke-width="2"/><circle cx="24" cy="14" r="1.5" fill="var(--ink-black)"/><circle cx="32" cy="14" r="1.5" fill="var(--ink-black)"/><path d="M24 19c2 2 6 2 8 0" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><path d="M17 14c0-9 6-14 11-14s11 5 11 14" stroke="var(--ink-black)" stroke-width="2.5" fill="none"/><line x1="28" y1="27" x2="28" y2="50" stroke="var(--imperial-red)" stroke-width="2.5" stroke-linecap="round"/><line x1="28" y1="35" x2="18" y2="44" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="35" x2="38" y2="44" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="21" y2="65" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="35" y2="65" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/></svg>
+            <p class="text-xs font-semibold mt-1">Manager Li</p><p class="text-xs text-gray-400 italic leading-tight">overtime?</p>
+          </div>
+          <!-- Second Uncle -->
+          <div class="text-center char-uncle-tan">
+            <svg class="mx-auto" width="40" height="52" viewBox="0 0 56 72" fill="none"><circle cx="28" cy="16" r="11" fill="#FFF" stroke="var(--imperial-red)" stroke-width="2"/><circle cx="24" cy="14" r="1.5" fill="var(--ink-black)"/><circle cx="32" cy="14" r="1.5" fill="var(--ink-black)"/><path d="M24 19c2 2 6 2 8 0" stroke="var(--ink-black)" stroke-width="1.2" stroke-linecap="round"/><path d="M19 10c1-5 4-8 9-8s8 3 9 8" stroke="var(--ink-black)" stroke-width="2" fill="none"/><line x1="28" y1="27" x2="28" y2="50" stroke="var(--imperial-red)" stroke-width="2.5" stroke-linecap="round"/><line x1="28" y1="35" x2="18" y2="44" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="35" x2="38" y2="44" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="21" y2="65" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="35" y2="65" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/></svg>
+            <p class="text-xs font-semibold mt-1">2nd Uncle</p><p class="text-xs text-gray-400 italic leading-tight">stock tips</p>
+          </div>
+          <!-- Newlyweds -->
+          <div class="text-center char-couple">
+            <svg class="mx-auto" width="48" height="52" viewBox="0 0 68 72" fill="none"><circle cx="22" cy="16" r="9" fill="#FFF" stroke="var(--imperial-red)" stroke-width="2"/><circle cx="19" cy="14" r="1.2" fill="var(--ink-black)"/><circle cx="25" cy="14" r="1.2" fill="var(--ink-black)"/><line x1="22" y1="25" x2="22" y2="46" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="22" y1="32" x2="14" y2="40" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><line x1="22" y1="46" x2="16" y2="62" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><line x1="22" y1="46" x2="28" y2="62" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><circle cx="46" cy="16" r="9" fill="#FFF" stroke="var(--imperial-red)" stroke-width="2"/><circle cx="43" cy="14" r="1.2" fill="var(--ink-black)"/><circle cx="49" cy="14" r="1.2" fill="var(--ink-black)"/><line x1="46" y1="25" x2="46" y2="46" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="46" y1="32" x2="54" y2="40" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><line x1="46" y1="46" x2="40" y2="62" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><line x1="46" y1="46" x2="52" y2="62" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <p class="text-xs font-semibold mt-1">Newlyweds</p><p class="text-xs text-gray-400 italic leading-tight">just married</p>
+          </div>
+          <!-- Friend Kai -->
+          <div class="text-center char-david">
+            <svg class="mx-auto" width="40" height="52" viewBox="0 0 56 72" fill="none"><circle cx="28" cy="16" r="11" fill="#FFF" stroke="var(--imperial-red)" stroke-width="2"/><circle cx="24" cy="14" r="1.5" fill="var(--ink-black)"/><circle cx="32" cy="14" r="1.5" fill="var(--ink-black)"/><path d="M24 19c2 2 6 2 8 0" stroke="var(--ink-black)" stroke-width="1.2" stroke-linecap="round"/><path d="M17 13c0-8 5-13 11-13s11 5 11 13" stroke="var(--ink-black)" stroke-width="2.5" fill="none"/><line x1="28" y1="27" x2="28" y2="50" stroke="var(--imperial-red)" stroke-width="2.5" stroke-linecap="round"/><line x1="28" y1="35" x2="18" y2="44" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="35" x2="38" y2="44" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="21" y2="65" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="35" y2="65" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/></svg>
+            <p class="text-xs font-semibold mt-1">Friend Kai</p><p class="text-xs text-gray-400 italic leading-tight">new car</p>
+          </div>
+          <!-- WeChat Group -->
+          <div class="text-center char-couple">
+            <svg class="mx-auto" width="48" height="52" viewBox="0 0 80 72" fill="none"><circle cx="20" cy="18" r="9" fill="#FFF" stroke="var(--imperial-red)" stroke-width="2"/><circle cx="17" cy="16" r="1.2" fill="var(--ink-black)"/><circle cx="23" cy="16" r="1.2" fill="var(--ink-black)"/><line x1="20" y1="27" x2="20" y2="46" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><circle cx="40" cy="16" r="9" fill="#FFF" stroke="var(--harvest-gold)" stroke-width="2"/><circle cx="37" cy="14" r="1.2" fill="var(--ink-black)"/><circle cx="43" cy="14" r="1.2" fill="var(--ink-black)"/><line x1="40" y1="25" x2="40" y2="46" stroke="var(--harvest-gold)" stroke-width="2" stroke-linecap="round"/><circle cx="60" cy="18" r="9" fill="#FFF" stroke="var(--imperial-red)" stroke-width="2"/><circle cx="57" cy="16" r="1.2" fill="var(--ink-black)"/><circle cx="63" cy="16" r="1.2" fill="var(--ink-black)"/><line x1="60" y1="27" x2="60" y2="46" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/></svg>
+            <p class="text-xs font-semibold mt-1">WeChat</p><p class="text-xs text-gray-400 italic leading-tight">group chat</p>
+          </div>
+          <!-- The Whole Table -->
+          <div class="text-center char-weijie">
+            <svg class="mx-auto" width="48" height="52" viewBox="0 0 80 72" fill="none"><circle cx="20" cy="18" r="9" fill="#FFF" stroke="var(--imperial-red)" stroke-width="2"/><circle cx="17" cy="16" r="1.2" fill="var(--ink-black)"/><circle cx="23" cy="16" r="1.2" fill="var(--ink-black)"/><line x1="20" y1="27" x2="20" y2="46" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><circle cx="40" cy="16" r="9" fill="#FFF" stroke="var(--harvest-gold)" stroke-width="2"/><circle cx="37" cy="14" r="1.2" fill="var(--ink-black)"/><circle cx="43" cy="14" r="1.2" fill="var(--ink-black)"/><line x1="40" y1="25" x2="40" y2="46" stroke="var(--harvest-gold)" stroke-width="2" stroke-linecap="round"/><circle cx="60" cy="18" r="9" fill="#FFF" stroke="var(--imperial-red)" stroke-width="2"/><circle cx="57" cy="16" r="1.2" fill="var(--ink-black)"/><circle cx="63" cy="16" r="1.2" fill="var(--ink-black)"/><line x1="60" y1="27" x2="60" y2="46" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/></svg>
+            <p class="text-xs font-semibold mt-1">Whole Table</p><p class="text-xs text-gray-400 italic leading-tight">the toast</p>
+          </div>
+          <!-- Cousin Rui -->
+          <div class="text-center char-david">
+            <svg class="mx-auto" width="40" height="52" viewBox="0 0 56 72" fill="none"><circle cx="28" cy="16" r="11" fill="#FFF" stroke="var(--imperial-red)" stroke-width="2"/><circle cx="24" cy="14" r="1.5" fill="var(--ink-black)"/><circle cx="32" cy="14" r="1.5" fill="var(--ink-black)"/><path d="M24 19c2 2 6 2 8 0" stroke="var(--ink-black)" stroke-width="1.2" stroke-linecap="round"/><path d="M17 13c0-8 5-13 11-13s11 5 11 13" stroke="var(--ink-black)" stroke-width="2.5" fill="none"/><line x1="28" y1="27" x2="28" y2="50" stroke="var(--imperial-red)" stroke-width="2.5" stroke-linecap="round"/><line x1="28" y1="35" x2="18" y2="44" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="35" x2="38" y2="44" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="21" y2="65" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="35" y2="65" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/></svg>
+            <p class="text-xs font-semibold mt-1">Cousin Rui</p><p class="text-xs text-gray-400 italic leading-tight">new hobby</p>
+          </div>
+          <!-- Mr. Peterson -->
+          <div class="text-center char-uncle-tan">
+            <svg class="mx-auto" width="40" height="52" viewBox="0 0 56 72" fill="none"><circle cx="28" cy="16" r="11" fill="#FFF" stroke="var(--imperial-red)" stroke-width="2"/><circle cx="24" cy="14" r="1.5" fill="var(--ink-black)"/><circle cx="32" cy="14" r="1.5" fill="var(--ink-black)"/><path d="M23 20c2-2 6-2 8 0" stroke="var(--ink-black)" stroke-width="1.5" stroke-linecap="round"/><path d="M17 11c1-7 5-11 11-11s10 4 11 11" stroke="var(--ink-black)" stroke-width="2" fill="none"/><line x1="28" y1="27" x2="28" y2="50" stroke="#8B7D6B" stroke-width="2.5" stroke-linecap="round"/><line x1="28" y1="35" x2="18" y2="44" stroke="#8B7D6B" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="35" x2="38" y2="44" stroke="#8B7D6B" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="21" y2="65" stroke="#8B7D6B" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="35" y2="65" stroke="#8B7D6B" stroke-width="2" stroke-linecap="round"/></svg>
+            <p class="text-xs font-semibold mt-1">Mr. Peterson</p><p class="text-xs text-gray-400 italic leading-tight">confused</p>
+          </div>
+          <!-- Joyce Lim -->
+          <div class="text-center char-jenny">
+            <svg class="mx-auto" width="40" height="52" viewBox="0 0 56 72" fill="none"><circle cx="28" cy="14" r="10" fill="#FFF" stroke="var(--imperial-red)" stroke-width="2"/><circle cx="24" cy="12" r="1.5" fill="var(--ink-black)"/><circle cx="32" cy="12" r="1.5" fill="var(--ink-black)"/><path d="M24 17c2 2 6 2 8 0" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><path d="M17 12c0-9 6-14 11-14s11 5 11 14" stroke="var(--ink-black)" stroke-width="2.5" fill="none"/><line x1="28" y1="24" x2="28" y2="46" stroke="var(--imperial-red)" stroke-width="2.5" stroke-linecap="round"/><line x1="28" y1="32" x2="20" y2="38" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><circle cx="28" cy="40" r="3" fill="#FFF" stroke="var(--imperial-red)" stroke-width="1"/><line x1="28" y1="46" x2="21" y2="62" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="46" x2="35" y2="62" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/></svg>
+            <p class="text-xs font-semibold mt-1">Joyce Lim</p><p class="text-xs text-gray-400 italic leading-tight">new baby</p>
+          </div>
+          <!-- Uncle Ng -->
+          <div class="text-center char-uncle-tan">
+            <svg class="mx-auto" width="40" height="52" viewBox="0 0 56 72" fill="none"><circle cx="28" cy="16" r="11" fill="#FFF" stroke="var(--imperial-red)" stroke-width="2"/><circle cx="24" cy="14" r="1.5" fill="var(--ink-black)"/><circle cx="32" cy="14" r="1.5" fill="var(--ink-black)"/><path d="M24 19c2 2 6 2 8 0" stroke="var(--ink-black)" stroke-width="1.2" stroke-linecap="round"/><path d="M19 10c1-5 4-8 9-8s8 3 9 8" stroke="var(--ink-black)" stroke-width="2" fill="none"/><path d="M20 30 L36 30 L36 50 L20 50 Z" fill="#FFF" stroke="var(--harvest-gold)" stroke-width="1" opacity=".4"/><line x1="28" y1="27" x2="28" y2="50" stroke="var(--imperial-red)" stroke-width="2.5" stroke-linecap="round"/><line x1="28" y1="35" x2="18" y2="44" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="35" x2="38" y2="44" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="21" y2="65" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="35" y2="65" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/></svg>
+            <p class="text-xs font-semibold mt-1">Uncle Ng</p><p class="text-xs text-gray-400 italic leading-tight">the cook</p>
+          </div>
+          <!-- Aunty Helen -->
+          <div class="text-center char-lim">
+            <svg class="mx-auto" width="40" height="52" viewBox="0 0 56 72" fill="none"><circle cx="28" cy="16" r="11" fill="#FFF" stroke="var(--imperial-red)" stroke-width="2"/><circle cx="24" cy="14" r="1.5" fill="var(--ink-black)"/><circle cx="32" cy="14" r="1.5" fill="var(--ink-black)"/><path d="M24 19c2 2 6 2 8 0" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><path d="M16 14c0-10 6-15 12-15s12 5 12 15" stroke="var(--ink-black)" stroke-width="2.5" fill="none"/><circle cx="28" cy="3" r="2" fill="var(--harvest-gold)" opacity=".6"/><line x1="28" y1="27" x2="28" y2="50" stroke="var(--imperial-red)" stroke-width="2.5" stroke-linecap="round"/><line x1="28" y1="35" x2="18" y2="44" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="35" x2="38" y2="44" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="21" y2="65" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="35" y2="65" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/></svg>
+            <p class="text-xs font-semibold mt-1">Aunty Helen</p><p class="text-xs text-gray-400 italic leading-tight">MLM queen</p>
+          </div>
+          <!-- Marcus Koh -->
+          <div class="text-center char-nephew">
+            <svg class="mx-auto" width="40" height="52" viewBox="0 0 56 72" fill="none"><circle cx="28" cy="20" r="10" fill="#FFF" stroke="var(--imperial-red)" stroke-width="2"/><circle cx="24" cy="18" r="1.5" fill="var(--ink-black)"/><circle cx="32" cy="18" r="1.5" fill="var(--ink-black)"/><path d="M25 23c1 1.5 5 1.5 6 0" stroke="var(--ink-black)" stroke-width="1.2" stroke-linecap="round"/><path d="M20 14c0-6 4-10 8-10s8 4 8 10" stroke="var(--ink-black)" stroke-width="2" fill="none"/><line x1="28" y1="30" x2="28" y2="48" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="36" x2="20" y2="42" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><rect x="33" y="38" width="7" height="5" rx="1" fill="var(--harvest-gold)" opacity=".5"/><line x1="28" y1="48" x2="22" y2="60" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><line x1="28" y1="48" x2="34" y2="60" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/></svg>
+            <p class="text-xs font-semibold mt-1">Marcus Koh</p><p class="text-xs text-gray-400 italic leading-tight">PSLE stress</p>
+          </div>
+          <!-- Vincent & Karen -->
+          <div class="text-center char-couple">
+            <svg class="mx-auto" width="48" height="52" viewBox="0 0 68 72" fill="none"><circle cx="22" cy="16" r="9" fill="#FFF" stroke="var(--imperial-red)" stroke-width="2"/><circle cx="19" cy="14" r="1.2" fill="var(--ink-black)"/><circle cx="25" cy="14" r="1.2" fill="var(--ink-black)"/><line x1="22" y1="25" x2="22" y2="46" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="22" y1="46" x2="16" y2="62" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><line x1="22" y1="46" x2="28" y2="62" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><circle cx="46" cy="16" r="9" fill="#FFF" stroke="var(--imperial-red)" stroke-width="2"/><circle cx="43" cy="14" r="1.2" fill="var(--ink-black)"/><circle cx="49" cy="14" r="1.2" fill="var(--ink-black)"/><line x1="46" y1="25" x2="46" y2="46" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="46" y1="46" x2="40" y2="62" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><line x1="46" y1="46" x2="52" y2="62" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><circle cx="52" cy="38" r="2" fill="var(--harvest-gold)" opacity=".6"/></svg>
+            <p class="text-xs font-semibold mt-1">V. & Karen</p><p class="text-xs text-gray-400 italic leading-tight">engaged!</p>
+          </div>
+          <!-- Uncle Stephen -->
+          <div class="text-center char-david">
+            <svg class="mx-auto" width="40" height="52" viewBox="0 0 56 72" fill="none"><circle cx="28" cy="16" r="11" fill="#FFF" stroke="var(--imperial-red)" stroke-width="2"/><circle cx="24" cy="14" r="1.5" fill="var(--ink-black)"/><circle cx="32" cy="14" r="1.5" fill="var(--ink-black)"/><path d="M24 19c2 2 6 2 8 0" stroke="var(--ink-black)" stroke-width="1.2" stroke-linecap="round"/><path d="M19 10c1-5 4-8 9-8s8 3 9 8" stroke="var(--ink-black)" stroke-width="2" fill="none"/><line x1="28" y1="27" x2="28" y2="50" stroke="var(--imperial-red)" stroke-width="3" stroke-linecap="round"/><line x1="28" y1="34" x2="16" y2="42" stroke="var(--imperial-red)" stroke-width="2.5" stroke-linecap="round"/><line x1="28" y1="34" x2="40" y2="42" stroke="var(--imperial-red)" stroke-width="2.5" stroke-linecap="round"/><circle cx="28" cy="26" r="3.5" fill="var(--harvest-gold)" opacity=".5"/><line x1="28" y1="50" x2="20" y2="65" stroke="var(--imperial-red)" stroke-width="2.5" stroke-linecap="round"/><line x1="28" y1="50" x2="36" y2="65" stroke="var(--imperial-red)" stroke-width="2.5" stroke-linecap="round"/></svg>
+            <p class="text-xs font-semibold mt-1">Uncle Stephen</p><p class="text-xs text-gray-400 italic leading-tight">marathon man</p>
           </div>
         </div>
       </div>
@@ -230,6 +554,20 @@
   <!-- ==================== PROGRESS BAR ==================== -->
   <nav class="sticky top-0 z-40 bg-white bg-opacity-95 backdrop-filter backdrop-blur-sm border-b border-gray-100 py-3">
     <div class="max-w-3xl mx-auto px-6">
+      <div class="flex justify-center gap-3 sm:gap-4 text-center mb-3">
+        <div class="stat-badge rounded-lg px-3 py-1.5">
+          <p class="text-sm font-bold" style="color:var(--imperial-red)" x-text="stats.gamesPlayed"></p>
+          <p class="text-xs text-gray-400">Games</p>
+        </div>
+        <div class="stat-badge rounded-lg px-3 py-1.5">
+          <p class="text-sm font-bold" style="color:var(--harvest-gold)" x-text="stats.bestStreak"></p>
+          <p class="text-xs text-gray-400">Best Streak</p>
+        </div>
+        <div class="stat-badge rounded-lg px-3 py-1.5">
+          <p class="text-sm font-bold" style="color:var(--imperial-red)" x-text="stats.totalCorrect"></p>
+          <p class="text-xs text-gray-400">Total Correct</p>
+        </div>
+      </div>
       <div class="flex items-center justify-between mb-2">
         <p class="text-xs font-semibold tracking-widest uppercase" style="color:var(--imperial-red)">Hongbao Collection</p>
         <div class="flex items-center gap-3">
@@ -246,7 +584,9 @@
   </nav>
 
   <!-- ==================== GAME AREA ==================== -->
-  <section class="max-w-3xl mx-auto px-4 sm:px-6 py-12" x-show="!gameComplete">
+  <section class="max-w-3xl md:max-w-4xl mx-auto px-2 sm:px-6 py-12" x-show="!gameComplete">
+  <div class="mahjong-frame">
+    <div class="max-w-2xl mx-auto">
 
     <!-- Round counter -->
     <div class="text-center mb-2">
@@ -266,8 +606,8 @@
 
     <!-- Current character spotlight -->
     <template x-if="currentRound">
-      <div class="character-spotlight bg-white rounded-3xl shadow-lg border-2 border-gray-100 p-8 text-center mb-8 pop-in" :key="roundIndex">
-        <span class="text-6xl block mb-3" x-text="currentRound.character.icon"></span>
+      <div class="character-spotlight bg-white rounded-3xl shadow-lg p-8 text-center mb-8 pop-in ornate-card" :key="roundIndex">
+        <div class="quiz-char w-20 h-24 mx-auto mb-3" x-html="charSvg(currentRound.character.name)"></div>
         <h3 class="text-xl font-bold mb-1" x-text="currentRound.character.name"></h3>
         <p class="text-sm text-gray-400 mb-4" x-text="currentRound.character.role"></p>
         <div class="inline-block bg-gray-50 rounded-xl px-5 py-3 max-w-sm">
@@ -318,11 +658,13 @@
         </div>
       </div>
     </template>
+    </div>
+  </div>
   </section>
 
   <!-- ==================== VICTORY / RESULTS ==================== -->
   <section x-show="gameComplete" x-transition class="max-w-3xl mx-auto px-6 py-16 text-center">
-    <div class="bg-white rounded-3xl shadow-xl border-2 p-10 pop-in" style="border-color:var(--harvest-gold)">
+    <div class="bg-white rounded-3xl shadow-xl p-10 pop-in ornate-card">
       <p class="text-5xl mb-4" x-text="hongbaoFilled === 6 ? '🎊' : hongbaoFilled >= 4 ? '🎉' : '🧧'"></p>
       <h3 class="font-cn text-3xl font-bold mb-2" style="color:var(--imperial-red)" x-text="hongbaoFilled === 6 ? 'All Hongbao Filled!' : hongbaoFilled >= 4 ? 'Well Done!' : 'Keep Practicing!'"></h3>
       <p class="text-gray-500 text-sm mb-6">
@@ -352,7 +694,7 @@
         <div class="space-y-4">
           <template x-for="(r, i) in roundHistory" :key="i">
             <div class="flex items-start gap-3 pb-3 border-b border-gray-100 last:border-0">
-              <span class="text-2xl flex-shrink-0" x-text="r.icon"></span>
+              <div class="w-10 h-12 flex-shrink-0" x-html="charSvg(r.guestName)"></div>
               <div class="min-w-0 flex-1">
                 <div class="flex items-center gap-2 mb-1">
                   <p class="text-sm font-semibold" x-text="r.guestName"></p>
@@ -381,7 +723,13 @@
   </section>
 
   <!-- Footer -->
-  <footer class="text-center py-10 px-6 border-t border-gray-100">
+  <footer class="relative text-center py-10 px-6 border-t border-gray-100 overflow-hidden">
+    <svg class="absolute top-0 left-0 w-full pointer-events-none" style="height:40px" viewBox="0 0 1000 40" preserveAspectRatio="xMidYMin slice" fill="none">
+      <path d="M-20,18 C100,12 250,24 400,18 C550,12 700,24 850,18 C950,14 1020,20 1020,20" stroke="#8B5E3C" stroke-width="1.5" fill="none" opacity=".2"/>
+      <circle cx="200" cy="14" r="4" fill="#FFB7C5" opacity=".35"/><circle cx="196" cy="10" r="3" fill="#FFB7C5" opacity=".3"/><circle cx="204" cy="10" r="3" fill="#FFB7C5" opacity=".3"/><circle cx="200" cy="14" r="1.5" fill="#FFD700" opacity=".3"/>
+      <circle cx="500" cy="20" r="4" fill="#FFB7C5" opacity=".35"/><circle cx="496" cy="16" r="3" fill="#FFB7C5" opacity=".3"/><circle cx="504" cy="16" r="3" fill="#FFB7C5" opacity=".3"/><circle cx="500" cy="20" r="1.5" fill="#FFD700" opacity=".3"/>
+      <circle cx="800" cy="16" r="4" fill="#FFB7C5" opacity=".35"/><circle cx="796" cy="12" r="3" fill="#FFB7C5" opacity=".3"/><circle cx="804" cy="12" r="3" fill="#FFB7C5" opacity=".3"/><circle cx="800" cy="16" r="1.5" fill="#FFD700" opacity=".3"/>
+    </svg>
     <p class="font-cn text-xl mb-2" style="color:var(--imperial-red)">新年快乐</p>
     <p class="text-xs text-gray-400">The Golden Gallop · Year of the Horse 2026</p>
     <p class="text-xs text-gray-300 mt-1">A Digital Altar of Good Fortune</p>
@@ -423,42 +771,76 @@
     ALL_GREETINGS.forEach(g => greetingMap[g.id] = g);
 
     /* ============================================================
+       CHARACTER SVG MAP — stick figures for quiz & results
+       ============================================================ */
+    const CHARACTER_SVGS = {
+      grandma: `<svg width="100%" height="100%" viewBox="0 0 56 72" fill="none"><circle cx="28" cy="16" r="11" fill="#FFF" stroke="var(--imperial-red)" stroke-width="2"/><circle cx="23" cy="14" r="1.5" fill="var(--ink-black)"/><circle cx="33" cy="14" r="1.5" fill="var(--ink-black)"/><path d="M24 19c2 2 6 2 8 0" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><circle cx="23" cy="14" r="4" stroke="var(--harvest-gold)" stroke-width="1" fill="none"/><circle cx="33" cy="14" r="4" stroke="var(--harvest-gold)" stroke-width="1" fill="none"/><line x1="27" y1="14" x2="29" y2="14" stroke="var(--harvest-gold)" stroke-width="1"/><ellipse cx="28" cy="6" rx="6" ry="4" fill="var(--imperial-red)" opacity=".15"/><line x1="28" y1="27" x2="28" y2="50" stroke="var(--imperial-red)" stroke-width="2.5" stroke-linecap="round"/><line x1="28" y1="35" x2="18" y2="44" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="35" x2="38" y2="44" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="20" y2="65" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="36" y2="65" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="38" y1="44" x2="42" y2="64" stroke="var(--harvest-gold)" stroke-width="1.5" stroke-linecap="round"/></svg>`,
+      boss: `<svg width="100%" height="100%" viewBox="0 0 56 72" fill="none"><circle cx="28" cy="16" r="11" fill="#FFF" stroke="var(--imperial-red)" stroke-width="2"/><circle cx="24" cy="14" r="1.5" fill="var(--ink-black)"/><circle cx="32" cy="14" r="1.5" fill="var(--ink-black)"/><path d="M25 19c1.5 1.5 4.5 1.5 6 0" stroke="var(--ink-black)" stroke-width="1.2" stroke-linecap="round"/><path d="M17 12c0-8 8-13 15-11 5 1.5 7 5 7 8" stroke="var(--ink-black)" stroke-width="2" fill="none" stroke-linecap="round"/><line x1="28" y1="27" x2="28" y2="50" stroke="var(--ink-black)" stroke-width="2.5" stroke-linecap="round"/><polygon points="28,28 25,38 28,36 31,38" fill="var(--imperial-red)"/><line x1="28" y1="35" x2="18" y2="43" stroke="var(--ink-black)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="35" x2="38" y2="43" stroke="var(--ink-black)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="21" y2="65" stroke="var(--ink-black)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="35" y2="65" stroke="var(--ink-black)" stroke-width="2" stroke-linecap="round"/></svg>`,
+      david: `<svg width="100%" height="100%" viewBox="0 0 56 72" fill="none"><circle cx="28" cy="16" r="11" fill="#FFF" stroke="var(--imperial-red)" stroke-width="2"/><circle cx="24" cy="14" r="1.5" fill="var(--ink-black)"/><circle cx="32" cy="14" r="1.5" fill="var(--ink-black)"/><path d="M24 19c2 2 6 2 8 0" stroke="var(--ink-black)" stroke-width="1.2" stroke-linecap="round"/><ellipse cx="28" cy="7" rx="8" ry="3.5" fill="var(--harvest-gold)" opacity=".7"/><polygon points="28,3 26,7 30,7" fill="none" stroke="#fff" stroke-width=".7"/><polygon points="28,8 26,4 30,4" fill="none" stroke="#fff" stroke-width=".7"/><path d="M18 14c-1-4 1-9 4-11" stroke="var(--ink-black)" stroke-width="1.5" fill="none" stroke-linecap="round"/><path d="M38 14c1-4-1-9-4-11" stroke="var(--ink-black)" stroke-width="1.5" fill="none" stroke-linecap="round"/><line x1="28" y1="27" x2="28" y2="50" stroke="var(--imperial-red)" stroke-width="2.5" stroke-linecap="round"/><line x1="28" y1="35" x2="18" y2="44" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="35" x2="38" y2="44" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="21" y2="65" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="35" y2="65" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/></svg>`,
+      jenny: `<svg width="100%" height="100%" viewBox="0 0 56 72" fill="none"><circle cx="28" cy="16" r="11" fill="#FFF" stroke="var(--imperial-red)" stroke-width="2"/><circle cx="24" cy="14" r="1.5" fill="var(--ink-black)"/><circle cx="32" cy="14" r="1.5" fill="var(--ink-black)"/><path d="M24 19c2 2 6 2 8 0" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><path d="M17 14c0-9 6-14 11-14s11 5 11 14" stroke="var(--ink-black)" stroke-width="2.5" fill="none"/><line x1="17" y1="14" x2="15" y2="30" stroke="var(--ink-black)" stroke-width="2" stroke-linecap="round"/><line x1="39" y1="14" x2="41" y2="30" stroke="var(--ink-black)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="27" x2="28" y2="50" stroke="var(--imperial-red)" stroke-width="2.5" stroke-linecap="round"/><line x1="28" y1="35" x2="18" y2="44" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="35" x2="38" y2="44" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><rect x="36" y="40" width="5" height="8" rx="1" fill="var(--harvest-gold)" opacity=".5"/><line x1="28" y1="50" x2="21" y2="65" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="35" y2="65" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/></svg>`,
+      mrslau: `<svg width="100%" height="100%" viewBox="0 0 56 72" fill="none"><circle cx="28" cy="16" r="11" fill="#FFF" stroke="var(--imperial-red)" stroke-width="2"/><circle cx="24" cy="14" r="1.5" fill="var(--ink-black)"/><circle cx="32" cy="14" r="1.5" fill="var(--ink-black)"/><path d="M24 19c2 2 6 2 8 0" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><path d="M19 11c-1-7 5-12 9-12s10 5 9 12" stroke="var(--ink-black)" stroke-width="2" fill="none"/><line x1="28" y1="27" x2="28" y2="50" stroke="var(--imperial-red)" stroke-width="2.5" stroke-linecap="round"/><path d="M21 32 L35 32 L33 50 L23 50 Z" fill="var(--harvest-gold)" opacity=".2" stroke="var(--harvest-gold)" stroke-width="1"/><line x1="28" y1="35" x2="18" y2="44" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="35" x2="38" y2="44" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="38" y1="44" x2="44" y2="36" stroke="#16a34a" stroke-width="2" stroke-linecap="round"/><line x1="44" y1="36" x2="46" y2="32" stroke="#16a34a" stroke-width="1.5" stroke-linecap="round"/><line x1="44" y1="36" x2="42" y2="31" stroke="#16a34a" stroke-width="1.5" stroke-linecap="round"/><line x1="28" y1="50" x2="21" y2="65" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="35" y2="65" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/></svg>`,
+      peterson: `<svg width="100%" height="100%" viewBox="0 0 56 72" fill="none"><circle cx="28" cy="16" r="11" fill="#FFF" stroke="var(--imperial-red)" stroke-width="2"/><circle cx="24" cy="14" r="1.5" fill="var(--ink-black)"/><circle cx="32" cy="14" r="1.5" fill="var(--ink-black)"/><path d="M23 20c2-2 6-2 8 0" stroke="var(--ink-black)" stroke-width="1.5" stroke-linecap="round"/><line x1="21" y1="10" x2="26" y2="11.5" stroke="var(--ink-black)" stroke-width="1.5" stroke-linecap="round"/><line x1="35" y1="10" x2="30" y2="11.5" stroke="var(--ink-black)" stroke-width="1.5" stroke-linecap="round"/><path d="M17 11c1-7 5-11 11-11s10 4 11 11" stroke="var(--ink-black)" stroke-width="2" fill="none"/><line x1="28" y1="27" x2="28" y2="50" stroke="#8B7D6B" stroke-width="2.5" stroke-linecap="round"/><path d="M22 28 L28 38 L34 28" stroke="#8B7D6B" stroke-width="1.5" fill="none" stroke-linecap="round"/><line x1="18" y1="36" x2="38" y2="36" stroke="#8B7D6B" stroke-width="2" stroke-linecap="round"/><line x1="18" y1="36" x2="20" y2="40" stroke="#8B7D6B" stroke-width="2" stroke-linecap="round"/><line x1="38" y1="36" x2="36" y2="40" stroke="#8B7D6B" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="21" y2="63" stroke="#8B7D6B" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="35" y2="63" stroke="#8B7D6B" stroke-width="2" stroke-linecap="round"/><ellipse cx="19" cy="65" rx="4" ry="2" fill="#8B7D6B" opacity=".3"/><ellipse cx="37" cy="65" rx="4" ry="2" fill="#8B7D6B" opacity=".3"/><path d="M42 20c2-3 2-6 0-8" stroke="#ccc" stroke-width="1" fill="none" stroke-linecap="round"/><path d="M46 22c2-3 2-6 0-8" stroke="#ccc" stroke-width="1" fill="none" stroke-linecap="round"/></svg>`,
+      nephew: `<svg width="100%" height="100%" viewBox="0 0 56 72" fill="none"><circle cx="28" cy="18" r="10" fill="#FFF" stroke="var(--imperial-red)" stroke-width="2"/><circle cx="24" cy="16" r="1.5" fill="var(--ink-black)"/><circle cx="32" cy="16" r="1.5" fill="var(--ink-black)"/><path d="M25 21c1 1.5 5 1.5 6 0" stroke="var(--ink-black)" stroke-width="1.2" stroke-linecap="round"/><polygon points="16,11 28,6 40,11 28,14" fill="var(--ink-black)"/><line x1="28" y1="10" x2="28" y2="6" stroke="var(--ink-black)" stroke-width="1.5"/><line x1="40" y1="11" x2="40" y2="16" stroke="var(--ink-black)" stroke-width="1"/><circle cx="40" cy="17" r="1.5" fill="var(--harvest-gold)"/><line x1="28" y1="28" x2="28" y2="48" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="34" x2="19" y2="42" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="34" x2="37" y2="42" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><rect x="34" y="38" width="8" height="6" rx="1" fill="var(--harvest-gold)" opacity=".6"/><line x1="28" y1="48" x2="21" y2="62" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="48" x2="35" y2="62" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/></svg>`,
+      cousin_wei: `<svg width="100%" height="100%" viewBox="0 0 56 72" fill="none"><circle cx="28" cy="16" r="11" fill="#FFF" stroke="var(--imperial-red)" stroke-width="2"/><circle cx="24" cy="14" r="1.5" fill="var(--ink-black)"/><circle cx="32" cy="14" r="1.5" fill="var(--ink-black)"/><path d="M24 19c2 2 6 2 8 0" stroke="var(--ink-black)" stroke-width="1.2" stroke-linecap="round"/><path d="M17 13c0-8 5-13 11-13s11 5 11 13" stroke="var(--ink-black)" stroke-width="2.5" fill="none"/><line x1="28" y1="27" x2="28" y2="50" stroke="var(--imperial-red)" stroke-width="2.5" stroke-linecap="round"/><line x1="28" y1="35" x2="17" y2="42" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="35" x2="40" y2="28" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><circle cx="42" cy="26" r="3" fill="var(--harvest-gold)" opacity=".3"/><line x1="28" y1="50" x2="21" y2="65" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="35" y2="65" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/></svg>`,
+      couple: `<svg width="100%" height="100%" viewBox="0 0 68 72" fill="none"><circle cx="22" cy="16" r="9" fill="#FFF" stroke="var(--imperial-red)" stroke-width="2"/><circle cx="19" cy="14" r="1.2" fill="var(--ink-black)"/><circle cx="25" cy="14" r="1.2" fill="var(--ink-black)"/><path d="M19 18c1.5 1.5 4.5 1.5 6 0" stroke="var(--ink-black)" stroke-width="1" stroke-linecap="round"/><path d="M13 12c0-7 5-11 9-11s9 4 9 11" stroke="var(--ink-black)" stroke-width="2" fill="none"/><line x1="22" y1="25" x2="22" y2="46" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="22" y1="32" x2="14" y2="40" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><line x1="22" y1="32" x2="30" y2="40" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><line x1="22" y1="46" x2="16" y2="62" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><line x1="22" y1="46" x2="28" y2="62" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><circle cx="46" cy="16" r="9" fill="#FFF" stroke="var(--imperial-red)" stroke-width="2"/><circle cx="43" cy="14" r="1.2" fill="var(--ink-black)"/><circle cx="49" cy="14" r="1.2" fill="var(--ink-black)"/><path d="M43 18c1.5 1.5 4.5 1.5 6 0" stroke="var(--imperial-red)" stroke-width="1" stroke-linecap="round"/><path d="M37 12c-1-7 4-12 9-12s10 5 9 12" stroke="var(--ink-black)" stroke-width="2" fill="none"/><line x1="37" y1="12" x2="36" y2="26" stroke="var(--ink-black)" stroke-width="1.5" stroke-linecap="round"/><line x1="55" y1="12" x2="56" y2="26" stroke="var(--ink-black)" stroke-width="1.5" stroke-linecap="round"/><line x1="46" y1="25" x2="46" y2="46" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="46" y1="32" x2="38" y2="40" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><line x1="46" y1="32" x2="54" y2="40" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><line x1="46" y1="46" x2="40" y2="62" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><line x1="46" y1="46" x2="52" y2="62" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><path d="M32 36c0-2 2-4 3-2s3 0 3 2c0 3-3 5-3 5s-3-2-3-5z" fill="var(--imperial-red)" opacity=".3"/></svg>`,
+      elder_m: `<svg width="100%" height="100%" viewBox="0 0 56 72" fill="none"><circle cx="28" cy="16" r="11" fill="#FFF" stroke="var(--imperial-red)" stroke-width="2"/><circle cx="24" cy="14" r="1.5" fill="var(--ink-black)"/><circle cx="32" cy="14" r="1.5" fill="var(--ink-black)"/><path d="M24 19c2 2 6 2 8 0" stroke="var(--ink-black)" stroke-width="1.2" stroke-linecap="round"/><path d="M19 10c1-5 4-8 9-8s8 3 9 8" stroke="var(--ink-black)" stroke-width="2" fill="none"/><path d="M19 10c-2 1-3 3-3 5" stroke="var(--ink-black)" stroke-width="1.5" fill="none" stroke-linecap="round"/><path d="M37 10c2 1 3 3 3 5" stroke="var(--ink-black)" stroke-width="1.5" fill="none" stroke-linecap="round"/><line x1="28" y1="27" x2="28" y2="50" stroke="var(--imperial-red)" stroke-width="2.5" stroke-linecap="round"/><line x1="28" y1="35" x2="18" y2="44" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="35" x2="38" y2="44" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="21" y2="65" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="35" y2="65" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/></svg>`,
+      elder_f: `<svg width="100%" height="100%" viewBox="0 0 56 72" fill="none"><circle cx="28" cy="16" r="11" fill="#FFF" stroke="var(--imperial-red)" stroke-width="2"/><circle cx="24" cy="14" r="1.5" fill="var(--ink-black)"/><circle cx="32" cy="14" r="1.5" fill="var(--ink-black)"/><path d="M24 19c2 2 6 2 8 0" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><path d="M18 13c0-8 5-13 10-13s10 5 10 13" stroke="var(--ink-black)" stroke-width="2" fill="none"/><circle cx="28" cy="4" r="4" fill="var(--ink-black)" opacity=".2"/><line x1="28" y1="27" x2="28" y2="50" stroke="var(--imperial-red)" stroke-width="2.5" stroke-linecap="round"/><line x1="28" y1="35" x2="18" y2="44" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="35" x2="38" y2="44" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="21" y2="65" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="35" y2="65" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/></svg>`,
+      peer_m: `<svg width="100%" height="100%" viewBox="0 0 56 72" fill="none"><circle cx="28" cy="16" r="11" fill="#FFF" stroke="var(--imperial-red)" stroke-width="2"/><circle cx="24" cy="14" r="1.5" fill="var(--ink-black)"/><circle cx="32" cy="14" r="1.5" fill="var(--ink-black)"/><path d="M24 19c2 2 6 2 8 0" stroke="var(--ink-black)" stroke-width="1.2" stroke-linecap="round"/><path d="M17 13c0-8 5-13 11-13s11 5 11 13" stroke="var(--ink-black)" stroke-width="2.5" fill="none"/><line x1="28" y1="27" x2="28" y2="50" stroke="var(--imperial-red)" stroke-width="2.5" stroke-linecap="round"/><line x1="28" y1="35" x2="18" y2="44" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="35" x2="38" y2="44" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="21" y2="65" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="35" y2="65" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/></svg>`,
+      peer_f: `<svg width="100%" height="100%" viewBox="0 0 56 72" fill="none"><circle cx="28" cy="16" r="11" fill="#FFF" stroke="var(--imperial-red)" stroke-width="2"/><circle cx="24" cy="14" r="1.5" fill="var(--ink-black)"/><circle cx="32" cy="14" r="1.5" fill="var(--ink-black)"/><path d="M24 19c2 2 6 2 8 0" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><path d="M17 14c0-9 6-14 11-14s11 5 11 14" stroke="var(--ink-black)" stroke-width="2.5" fill="none"/><line x1="17" y1="14" x2="16" y2="26" stroke="var(--ink-black)" stroke-width="2" stroke-linecap="round"/><line x1="39" y1="14" x2="40" y2="26" stroke="var(--ink-black)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="27" x2="28" y2="50" stroke="var(--imperial-red)" stroke-width="2.5" stroke-linecap="round"/><line x1="28" y1="35" x2="18" y2="44" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="35" x2="38" y2="44" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="21" y2="65" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="35" y2="65" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/></svg>`,
+      child: `<svg width="100%" height="100%" viewBox="0 0 56 72" fill="none"><circle cx="28" cy="20" r="10" fill="#FFF" stroke="var(--imperial-red)" stroke-width="2"/><circle cx="24" cy="18" r="2" fill="var(--ink-black)"/><circle cx="32" cy="18" r="2" fill="var(--ink-black)"/><path d="M24 23c2 2.5 6 2.5 8 0" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><circle cx="20" cy="12" r="3" fill="var(--ink-black)" opacity=".2"/><circle cx="36" cy="12" r="3" fill="var(--ink-black)" opacity=".2"/><line x1="20" y1="12" x2="20" y2="8" stroke="var(--ink-black)" stroke-width="1.5" stroke-linecap="round"/><line x1="36" y1="12" x2="36" y2="8" stroke="var(--ink-black)" stroke-width="1.5" stroke-linecap="round"/><path d="M20 14c0-6 4-10 8-10s8 4 8 10" stroke="var(--ink-black)" stroke-width="2" fill="none"/><line x1="28" y1="30" x2="28" y2="48" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="36" x2="20" y2="42" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><line x1="28" y1="36" x2="36" y2="42" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><line x1="28" y1="48" x2="22" y2="60" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><line x1="28" y1="48" x2="34" y2="60" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/></svg>`,
+      joyce: `<svg width="100%" height="100%" viewBox="0 0 56 72" fill="none"><circle cx="28" cy="14" r="10" fill="#FFF" stroke="var(--imperial-red)" stroke-width="2"/><circle cx="24" cy="12" r="1.5" fill="var(--ink-black)"/><circle cx="32" cy="12" r="1.5" fill="var(--ink-black)"/><path d="M24 17c2 2 6 2 8 0" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><path d="M17 12c0-9 6-14 11-14s11 5 11 14" stroke="var(--ink-black)" stroke-width="2.5" fill="none"/><line x1="17" y1="12" x2="15" y2="24" stroke="var(--ink-black)" stroke-width="2" stroke-linecap="round"/><line x1="39" y1="12" x2="41" y2="24" stroke="var(--ink-black)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="24" x2="28" y2="46" stroke="var(--imperial-red)" stroke-width="2.5" stroke-linecap="round"/><line x1="28" y1="32" x2="20" y2="38" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="32" x2="36" y2="38" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><ellipse cx="28" cy="42" rx="6" ry="5" fill="var(--harvest-gold)" opacity=".25" stroke="var(--harvest-gold)" stroke-width="1"/><circle cx="28" cy="40" r="3" fill="#FFF" stroke="var(--imperial-red)" stroke-width="1"/><circle cx="27" cy="39" r=".7" fill="var(--ink-black)"/><circle cx="29" cy="39" r=".7" fill="var(--ink-black)"/><line x1="28" y1="46" x2="21" y2="62" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="46" x2="35" y2="62" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/></svg>`,
+      uncle_ng: `<svg width="100%" height="100%" viewBox="0 0 56 72" fill="none"><circle cx="28" cy="16" r="11" fill="#FFF" stroke="var(--imperial-red)" stroke-width="2"/><circle cx="24" cy="14" r="1.5" fill="var(--ink-black)"/><circle cx="32" cy="14" r="1.5" fill="var(--ink-black)"/><path d="M24 19c2 2 6 2 8 0" stroke="var(--ink-black)" stroke-width="1.2" stroke-linecap="round"/><path d="M19 10c1-5 4-8 9-8s8 3 9 8" stroke="var(--ink-black)" stroke-width="2" fill="none"/><line x1="28" y1="27" x2="28" y2="50" stroke="var(--imperial-red)" stroke-width="2.5" stroke-linecap="round"/><path d="M20 30 L36 30 L36 50 L20 50 Z" fill="#FFF" stroke="var(--harvest-gold)" stroke-width="1" opacity=".4"/><line x1="28" y1="35" x2="18" y2="44" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="35" x2="38" y2="44" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><ellipse cx="42" cy="40" rx="4" ry="3" fill="var(--ink-black)" opacity=".15"/><line x1="38" y1="44" x2="42" y2="40" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><line x1="28" y1="50" x2="21" y2="65" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="35" y2="65" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/></svg>`,
+      aunty_helen: `<svg width="100%" height="100%" viewBox="0 0 56 72" fill="none"><circle cx="28" cy="16" r="11" fill="#FFF" stroke="var(--imperial-red)" stroke-width="2"/><circle cx="24" cy="14" r="1.5" fill="var(--ink-black)"/><circle cx="32" cy="14" r="1.5" fill="var(--ink-black)"/><path d="M24 19c2 2 6 2 8 0" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><path d="M16 14c0-10 6-15 12-15s12 5 12 15" stroke="var(--ink-black)" stroke-width="2.5" fill="none"/><line x1="16" y1="14" x2="14" y2="28" stroke="var(--ink-black)" stroke-width="2" stroke-linecap="round"/><line x1="40" y1="14" x2="42" y2="28" stroke="var(--ink-black)" stroke-width="2" stroke-linecap="round"/><circle cx="28" cy="3" r="2" fill="var(--harvest-gold)" opacity=".6"/><line x1="28" y1="27" x2="28" y2="50" stroke="var(--imperial-red)" stroke-width="2.5" stroke-linecap="round"/><line x1="28" y1="35" x2="18" y2="44" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="35" x2="38" y2="44" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><circle cx="16" cy="46" r="2" fill="var(--imperial-red)" opacity=".3"/><circle cx="14" cy="44" r="1.5" fill="var(--imperial-red)" opacity=".2"/><line x1="28" y1="50" x2="21" y2="65" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="35" y2="65" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/></svg>`,
+      marcus: `<svg width="100%" height="100%" viewBox="0 0 56 72" fill="none"><circle cx="28" cy="20" r="10" fill="#FFF" stroke="var(--imperial-red)" stroke-width="2"/><circle cx="24" cy="18" r="1.5" fill="var(--ink-black)"/><circle cx="32" cy="18" r="1.5" fill="var(--ink-black)"/><path d="M25 23c1 1.5 5 1.5 6 0" stroke="var(--ink-black)" stroke-width="1.2" stroke-linecap="round"/><path d="M20 14c0-6 4-10 8-10s8 4 8 10" stroke="var(--ink-black)" stroke-width="2" fill="none"/><line x1="28" y1="30" x2="28" y2="48" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="36" x2="20" y2="42" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><line x1="28" y1="36" x2="36" y2="42" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><rect x="33" y="38" width="7" height="5" rx="1" fill="var(--harvest-gold)" opacity=".5"/><line x1="35" y1="39" x2="38" y2="39" stroke="var(--ink-black)" stroke-width=".5"/><line x1="35" y1="41" x2="38" y2="41" stroke="var(--ink-black)" stroke-width=".5"/><line x1="28" y1="48" x2="22" y2="60" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><line x1="28" y1="48" x2="34" y2="60" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/></svg>`,
+      vincent_karen: `<svg width="100%" height="100%" viewBox="0 0 68 72" fill="none"><circle cx="22" cy="16" r="9" fill="#FFF" stroke="var(--imperial-red)" stroke-width="2"/><circle cx="19" cy="14" r="1.2" fill="var(--ink-black)"/><circle cx="25" cy="14" r="1.2" fill="var(--ink-black)"/><path d="M19 18c1.5 1.5 4.5 1.5 6 0" stroke="var(--ink-black)" stroke-width="1" stroke-linecap="round"/><path d="M13 12c0-7 5-11 9-11s9 4 9 11" stroke="var(--ink-black)" stroke-width="2" fill="none"/><line x1="22" y1="25" x2="22" y2="46" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="22" y1="32" x2="14" y2="40" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><line x1="22" y1="32" x2="30" y2="40" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><line x1="22" y1="46" x2="16" y2="62" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><line x1="22" y1="46" x2="28" y2="62" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><circle cx="46" cy="16" r="9" fill="#FFF" stroke="var(--imperial-red)" stroke-width="2"/><circle cx="43" cy="14" r="1.2" fill="var(--ink-black)"/><circle cx="49" cy="14" r="1.2" fill="var(--ink-black)"/><path d="M43 18c1.5 1.5 4.5 1.5 6 0" stroke="var(--ink-black)" stroke-width="1" stroke-linecap="round"/><path d="M37 12c-1-8 4-13 9-13s10 5 9 13" stroke="var(--ink-black)" stroke-width="2" fill="none"/><line x1="37" y1="12" x2="35" y2="26" stroke="var(--ink-black)" stroke-width="1.5" stroke-linecap="round"/><line x1="55" y1="12" x2="57" y2="26" stroke="var(--ink-black)" stroke-width="1.5" stroke-linecap="round"/><line x1="46" y1="25" x2="46" y2="46" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="46" y1="32" x2="38" y2="40" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><line x1="46" y1="32" x2="54" y2="40" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><line x1="46" y1="46" x2="40" y2="62" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><line x1="46" y1="46" x2="52" y2="62" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><circle cx="52" cy="38" r="2" fill="var(--harvest-gold)" opacity=".6"/><path d="M32 34c0-2 2-4 3-2s3 0 3 2c0 3-3 5-3 5s-3-2-3-5z" fill="var(--imperial-red)" opacity=".4"/></svg>`,
+      uncle_stephen: `<svg width="100%" height="100%" viewBox="0 0 56 72" fill="none"><circle cx="28" cy="16" r="11" fill="#FFF" stroke="var(--imperial-red)" stroke-width="2"/><circle cx="24" cy="14" r="1.5" fill="var(--ink-black)"/><circle cx="32" cy="14" r="1.5" fill="var(--ink-black)"/><path d="M24 19c2 2 6 2 8 0" stroke="var(--ink-black)" stroke-width="1.2" stroke-linecap="round"/><path d="M19 10c1-5 4-8 9-8s8 3 9 8" stroke="var(--ink-black)" stroke-width="2" fill="none"/><line x1="28" y1="27" x2="28" y2="50" stroke="var(--imperial-red)" stroke-width="3" stroke-linecap="round"/><line x1="28" y1="34" x2="16" y2="42" stroke="var(--imperial-red)" stroke-width="2.5" stroke-linecap="round"/><line x1="28" y1="34" x2="40" y2="42" stroke="var(--imperial-red)" stroke-width="2.5" stroke-linecap="round"/><line x1="16" y1="42" x2="14" y2="38" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="40" y1="42" x2="42" y2="38" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><circle cx="28" cy="26" r="3.5" fill="var(--harvest-gold)" opacity=".5" stroke="var(--harvest-gold)" stroke-width=".8"/><line x1="28" y1="50" x2="20" y2="65" stroke="var(--imperial-red)" stroke-width="2.5" stroke-linecap="round"/><line x1="28" y1="50" x2="36" y2="65" stroke="var(--imperial-red)" stroke-width="2.5" stroke-linecap="round"/></svg>`,
+      group: `<svg width="100%" height="100%" viewBox="0 0 80 72" fill="none"><circle cx="20" cy="18" r="9" fill="#FFF" stroke="var(--imperial-red)" stroke-width="2"/><circle cx="17" cy="16" r="1.2" fill="var(--ink-black)"/><circle cx="23" cy="16" r="1.2" fill="var(--ink-black)"/><path d="M17 20c1.5 1.5 4.5 1.5 6 0" stroke="var(--ink-black)" stroke-width="1" stroke-linecap="round"/><line x1="20" y1="27" x2="20" y2="46" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="20" y1="33" x2="13" y2="40" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><line x1="20" y1="33" x2="27" y2="40" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><line x1="20" y1="46" x2="15" y2="62" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><line x1="20" y1="46" x2="25" y2="62" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><circle cx="40" cy="16" r="9" fill="#FFF" stroke="var(--harvest-gold)" stroke-width="2"/><circle cx="37" cy="14" r="1.2" fill="var(--ink-black)"/><circle cx="43" cy="14" r="1.2" fill="var(--ink-black)"/><path d="M37 18c1.5 1.5 4.5 1.5 6 0" stroke="var(--ink-black)" stroke-width="1" stroke-linecap="round"/><line x1="40" y1="25" x2="40" y2="46" stroke="var(--harvest-gold)" stroke-width="2" stroke-linecap="round"/><line x1="40" y1="32" x2="33" y2="40" stroke="var(--harvest-gold)" stroke-width="1.5" stroke-linecap="round"/><line x1="40" y1="32" x2="47" y2="40" stroke="var(--harvest-gold)" stroke-width="1.5" stroke-linecap="round"/><line x1="40" y1="46" x2="35" y2="62" stroke="var(--harvest-gold)" stroke-width="1.5" stroke-linecap="round"/><line x1="40" y1="46" x2="45" y2="62" stroke="var(--harvest-gold)" stroke-width="1.5" stroke-linecap="round"/><circle cx="60" cy="18" r="9" fill="#FFF" stroke="var(--imperial-red)" stroke-width="2"/><circle cx="57" cy="16" r="1.2" fill="var(--ink-black)"/><circle cx="63" cy="16" r="1.2" fill="var(--ink-black)"/><path d="M57 20c1.5 1.5 4.5 1.5 6 0" stroke="var(--ink-black)" stroke-width="1" stroke-linecap="round"/><line x1="60" y1="27" x2="60" y2="46" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="60" y1="33" x2="53" y2="40" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><line x1="60" y1="33" x2="67" y2="40" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><line x1="60" y1="46" x2="55" y2="62" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><line x1="60" y1="46" x2="65" y2="62" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/></svg>`,
+    };
+
+    const SVG_NAME_MAP = {
+      'Ah Ma': 'grandma', 'Ah Gong': 'elder_m',
+      'Boon Huat': 'boss', 'Wei Jie': 'cousin_wei',
+      'Uncle Tan': 'elder_m', 'Uncle & Auntie': 'couple',
+      'WeChat Group': 'group', 'Nephew': 'nephew',
+      'Charmaine': 'peer_f', 'Aunty Ophelia': 'elder_f',
+      'Partner Zhang': 'peer_f', 'Jerrold': 'peer_m',
+      'Little Mei-Mei': 'child', 'Uncle Bao': 'elder_m',
+      'Aloysius': 'peer_m', 'Aunty Agnes': 'elder_f',
+      'Manager Li': 'peer_f', 'Second Uncle': 'elder_m',
+      'Newlyweds': 'couple', 'Friend Kai': 'peer_m',
+      'The Whole Table': 'group', 'Cousin Rui': 'peer_m',
+      'David Wongstein': 'david', 'Jenny': 'jenny',
+      'Aunty Lim': 'mrslau', 'Mr. Peterson': 'peterson',
+      'Joyce Lim': 'joyce', 'Uncle Ng': 'uncle_ng',
+      'Aunty Helen': 'aunty_helen', 'Marcus Koh': 'marcus',
+      'Vincent & Karen': 'vincent_karen', 'Uncle Stephen': 'uncle_stephen',
+    };
+
+    /* ============================================================
        SCENARIO POOL — characters + correct greetings + context
        Each refresh picks 6 random scenarios from this pool.
        ============================================================ */
     const ALL_SCENARIOS = [
       {
-        character: { icon:'👵', name:'Grandma', role:'Elder · Your father\'s mother', context:'She\'s 85 and beaming at the head of the table. She squeezes your hand as you sit down.' },
+        character: { icon:'👵', name:'Ah Ma', role:'Elder · Your father\'s mother', context:'She\'s 85 and beaming at the head of the table. She squeezes your hand as you sit down.' },
         correctId: 'shenti',
-        why: 'Health is the most treasured wish for elders. Saying 身体健康 (Shēn tǐ jiàn kāng) to Grandma shows filial respect — you\'re telling her that her well-being matters above all else.',
+        why: 'Health is the most treasured wish for elders. Saying 身体健康 (Shēn tǐ jiàn kāng) to Ah Ma shows filial respect — you\'re telling her that her well-being matters above all else.',
         distractors: ['caiyuan','bubu','madao','gongzuo','shiye'],
       },
       {
-        character: { icon:'👴', name:'Grandpa', role:'Elder · Family patriarch', context:'He\'s pouring tea for everyone and joking about being older than the zodiac cycle itself.' },
+        character: { icon:'👴', name:'Ah Gong', role:'Elder · Family patriarch', context:'He\'s pouring tea for everyone and joking about being older than the zodiac cycle itself.' },
         correctId: 'changming',
         why: '长命百岁 (Cháng mìng bǎi suì) is a deeply respectful wish for elders — "Long life, a hundred years!" It honors his age and wishes him many more years of joy.',
         distractors: ['caiyuan','bubu','madao','daji','shengyi'],
       },
       {
-        character: { icon:'👔', name:'Boss Chen', role:'Professional · Your department head', context:'He arrived in a sharp suit, red tie for the occasion. He gives you a nod across the table.' },
-        correctId: 'madao',
-        why: 'In a Horse year, 马到成功 (Mǎ dào chéng gōng) is the ultimate power phrase. It combines zodiac relevance with a wish for swift, decisive success — ambitious but respectful.',
-        distractors: ['shenti','hejia','niannian','xueye','longma'],
-      },
-      {
-        character: { icon:'🧑', name:'Cousin Wei', role:'Peer · Same generation, close friend', context:'She just got back from traveling Southeast Asia. You haven\'t seen her in a year.' },
-        correctId: 'wanshi',
-        why: '万事如意 (Wàn shì rú yì) — "May all things go as you wish" — is warm and universal, perfect for peers. It\'s heartfelt without being too formal, covering all bases for her adventures.',
-        distractors: ['shenti','caiyuan','bubu','shengyi','shengguan'],
-      },
-      {
-        character: { icon:'🧑‍💼', name:'Uncle Lin', role:'Professional · Business owner', context:'He just opened a second restaurant location. He\'s excitedly showing everyone photos on his phone.' },
+        character: { icon:'🧑‍💼', name:'Uncle Tan', role:'Elder · Business owner', context:'He just opened a second kopitiam location. He\'s excitedly showing everyone photos on his phone.' },
         correctId: 'shengyi',
         why: '生意兴隆 (Shēng yì xīng lóng) means "May your business prosper" — tailor-made for an entrepreneur celebrating expansion. It shows you pay attention to what matters to him.',
         distractors: ['shenti','hejia','xueye','wanshi','longma'],
       },
       {
-        character: { icon:'👨‍👩‍👧', name:'Uncle & Auntie Zhao', role:'Elder · Extended family couple', context:'They drove 3 hours with their kids to be here. Auntie is arranging dishes on the table.' },
+        character: { icon:'👨‍👩‍👧', name:'Uncle & Auntie', role:'Elder · Extended family couple', context:'They drove 3 hours with their kids to be here. Auntie is arranging dishes on the table.' },
         correctId: 'hejia',
         why: '阖家欢乐 (Hé jiā huān lè) — "Joy for the whole family." When greeting a couple with children, this phrase warmly embraces everyone under their roof.',
         distractors: ['bubu','caiyuan','madao','gongzuo','shiye'],
@@ -470,19 +852,13 @@
         distractors: ['shenti','caiyuan','bubu','shengyi','xueye'],
       },
       {
-        character: { icon:'🎓', name:'Nephew Hao', role:'Student · Your sister\'s son', context:'He\'s 16 and stressed about upcoming exams. He barely looks up from his textbook between courses.' },
+        character: { icon:'🎓', name:'Nephew', role:'Student · Your sister\'s son', context:'He\'s 16 and stressed about upcoming O-Levels. He barely looks up from his assessment book between courses.' },
         correctId: 'xueye',
         why: '学业有成 (Xuéyè yǒu chéng) — "Academic success." For students, this is THE greeting. It shows you understand their world and are rooting for them.',
         distractors: ['shenti','caiyuan','hejia','shengyi','shengguan'],
       },
       {
-        character: { icon:'💼', name:'Colleague Fang', role:'Professional · Coworker & friend', context:'You ran into her on the way in. She just mentioned she\'s hoping for a promotion this year.' },
-        correctId: 'bubu',
-        why: '步步高升 (Bù bù gāo shēng) — "Rising higher with every step." It\'s specifically about career advancement, which is exactly what\'s on her mind.',
-        distractors: ['shenti','hejia','niannian','xueye','longma'],
-      },
-      {
-        character: { icon:'👩‍🍳', name:'Auntie Mei', role:'Elder · Family friend & neighbor', context:'She catered half the dishes tonight. Everyone\'s raving about her fish — there\'s always two, one for tomorrow.' },
+        character: { icon:'👩‍🍳', name:'Aunty Ophelia', role:'Elder · Family friend & neighbor', context:'She catered half the dishes tonight. Everyone\'s raving about her fish — there\'s always two, one for tomorrow.' },
         correctId: 'niannian',
         why: '年年有余 (Nián nián yǒu yú) — "Surplus year after year." The word 余 (surplus) sounds like 鱼 (fish), connecting to the tradition of serving two fish at New Year\'s Eve dinner.',
         distractors: ['caiyuan','bubu','madao','shiye','shengguan'],
@@ -492,12 +868,6 @@
         correctId: 'caiyuan',
         why: '财源广进 (Cái yuán guǎng jìn) — "May wealth flow from all directions." For a business partner, this specifically wishes that your shared ventures attract prosperity from every angle.',
         distractors: ['shenti','hejia','xueye','longma','niannian'],
-      },
-      {
-        character: { icon:'🏇', name:'Friend Jie', role:'Peer · Your oldest friend', context:'He\'s the life of the party. He just challenged your uncle to a baijiu drinking contest. It\'s the Year of his zodiac!' },
-        correctId: 'yima',
-        why: '一马当先 (Yī mǎ dāng xiān) — "The lead horse charges ahead." In a Horse year, this is perfect for someone with a competitive, spirited personality.',
-        distractors: ['shenti','caiyuan','shengyi','hejia','xueye'],
       },
       {
         character: { icon:'👶', name:'Little Mei-Mei', role:'Child · Your toddler niece', context:'She just learned the most important phrase at the dinner: "Give me my red envelope!"' },
@@ -512,13 +882,7 @@
         distractors: ['shenti','hejia','xueye','longma','yifan'],
       },
       {
-        character: { icon:'🎒', name:'Cousin Tao', role:'Peer · Just graduated college', context:'He\'s about to start his first real job next month. He keeps nervously adjusting his new watch.' },
-        correctId: 'gongzuo',
-        why: '工作顺利 (Gōng zuò shùn lì) — "May your work go smoothly." For someone about to enter the workforce, this is perfectly targeted encouragement.',
-        distractors: ['shenti','hejia','niannian','shengyi','changming'],
-      },
-      {
-        character: { icon:'✈️', name:'Auntie Yun', role:'Elder · World traveler aunt', context:'She\'s planning a solo trip to Patagonia next month. She says this might be her most adventurous year yet.' },
+        character: { icon:'✈️', name:'Aunty Agnes', role:'Elder · World traveler aunt', context:'She\'s planning a solo trip to Patagonia next month. She says this might be her most adventurous year yet.' },
         correctId: 'yifan',
         why: '一帆风顺 (Yī fān fēng shùn) — "Smooth sailing in all things." For a traveler embarking on adventure, this is both literal and figurative — wishing safe, smooth journeys.',
         distractors: ['caiyuan','bubu','shengyi','shengguan','xueye'],
@@ -560,21 +924,21 @@
         distractors: ['shenti','hejia','xueye','longma','yifan'],
       },
       {
-        character: { icon:'✡️', name:'David', role:'Friend · Your Jewish friend from college', context:'He heard there\'d be incredible food and showed up with a bottle of Manischewitz "for cultural exchange." He\'s loving every minute of this.' },
+        character: { icon:'✡️', name:'David Wongstein', role:'Friend · Your Jewish friend from college', context:'He heard there\'d be incredible food and showed up with a bottle of Manischewitz "for cultural exchange." He\'s loving every minute of this.' },
         correctId: 'xinnian',
         why: '新年快乐 (Xīn nián kuài lè) — "Happy New Year!" The simplest, most universal greeting. For a friend from another culture joining the celebration, this is warm, welcoming, and easy to teach him to say back.',
         distractors: ['changming','shengguan','caiyuangun','shiye','bubu'],
       },
       {
-        character: { icon:'🇺🇸', name:'Jenny', role:'Peer · Your ABC friend', context:'She grew up speaking mostly English but lately has been taking Mandarin classes and watching C-dramas. Tonight she asked Grandma to only speak Chinese to her.' },
+        character: { icon:'🇺🇸', name:'Jenny', role:'Peer · Your ABC friend', context:'She grew up speaking mostly English but lately has been taking Mandarin classes and watching C-dramas. Tonight she asked Ah Ma to only speak Chinese to her.' },
         correctId: 'gongxi',
-        why: '恭喜发财 (Gōng xǐ fā cái) — "Wishing you prosperity!" This is THE phrase every ABC kid remembers. Saying it to Jenny isn\'t just a greeting — it\'s a shared cultural touchstone that says "welcome home."',
+        why: '恭喜发财 (Gōng xǐ fā cái) — "Wishing you prosperity!" This is THE classic CNY phrase everyone knows. Saying it to Jenny isn\'t just a greeting — it\'s a shared cultural touchstone that says "welcome home."',
         distractors: ['xueye','gongzuo','yima','changming','shiye'],
       },
       {
-        character: { icon:'🥬', name:'Mrs. Lau', role:'Community · Chinatown grocery auntie', context:'She\'s run the produce shop on Mott Street for 30 years. You bumped into her at the market this morning and she slipped extra scallions into your bag.' },
+        character: { icon:'🥬', name:'Aunty Lim', role:'Community · Wet market auntie', context:'She\'s run the vegetable stall at the wet market for 30 years. You bumped into her this morning and she slipped extra spring onions into your bag.' },
         correctId: 'shengyi',
-        why: '生意兴隆 (Shēng yì xīng lóng) — "May your business prosper." Mrs. Lau IS her shop. Wishing her business well is the most personal, respectful thing you can say — it honors her life\'s work.',
+        why: '生意兴隆 (Shēng yì xīng lóng) — "May your business prosper." Aunty Lim IS her stall. Wishing her business well is the most personal, respectful thing you can say — it honors her life\'s work.',
         distractors: ['xueye','madao','hejiaxf','yima','caiyuangun'],
       },
       {
@@ -582,6 +946,72 @@
         correctId: 'xinnian',
         why: '新年快乐 (Xīn nián kuài lè) — "Happy New Year!" When your neighbor shows up mid-celebration looking like he\'s about to file a noise complaint, you kill him with pure, radiant warmth. Hand him a dumpling, wish him a happy new year, and suddenly he\'s at the party.',
         distractors: ['shengguan','caiyuangun','xueye','shiye','changming'],
+      },
+      {
+        character: { icon:'👶', name:'Joyce Lim', role:'Family · Just became a mom', context:'She\'s cradling her 2-month-old daughter and looks exhausted but glowing. Everyone keeps saying the baby has your family\'s nose.' },
+        correctId: 'hejiaxf',
+        why: '阖家幸福 (Hé jiā xìng fú) — "Happiness for the whole family." For new parents, this warmly blesses their growing family and acknowledges the joy (and chaos) of their new chapter.',
+        distractors: ['bubu','gongzuo','xueye','shengguan','yima'],
+      },
+      {
+        character: { icon:'🏠', name:'Aloysius', role:'Peer · Just got BTO keys', context:'He just collected keys to his first HDB flat last week. He\'s showing everyone floor plan photos and talking about renovation quotes.' },
+        correctId: 'xinxiang',
+        why: '心想事成 (Xīn xiǎng shì chéng) — "May all your wishes come true." Getting your first home is a massive milestone in Singapore. This blessing encompasses all his dreams for the space.',
+        distractors: ['bubu','gongzuo','xueye','shengyi','caiyuangun'],
+      },
+      {
+        character: { icon:'🎖️', name:'Jerrold', role:'Peer · Just completed NS', context:'He ORD-ed two weeks ago and keeps checking his phone like he\'s waiting for someone to call him back to camp. Old habits die hard.' },
+        correctId: 'yifan',
+        why: '一帆风顺 (Yī fān fēng shùn) — "Smooth sailing in all things." After two years of regimented military life, wishing smooth sailing for whatever comes next (uni, work, life) hits perfectly.',
+        distractors: ['shenti','bubu','xueye','shengyi','shengguan'],
+      },
+      {
+        character: { icon:'🍜', name:'Uncle Ng', role:'Community · Your favorite hawker uncle', context:'He runs the char kway teow stall you\'ve been going to since secondary school. He always gives you extra cockles.' },
+        correctId: 'shengyi',
+        why: '生意兴隆 (Shēng yì xīng lóng) — "May your business prosper." For a hawker uncle who feeds the neighborhood, this shows respect for his craft and wishes his stall continues to thrive.',
+        distractors: ['shenti','hejiaxf','xueye','yima','caiyuan'],
+      },
+      {
+        character: { icon:'💅', name:'Aunty Helen', role:'Neighbor · The tai tai upstairs', context:'She doesn\'t work but somehow has impeccable nails, plays mahjong three times a week, and knows everyone\'s business. She just came back from a spa retreat in Bali.' },
+        correctId: 'hejiaxf',
+        why: '阖家幸福 (Hé jiā xìng fú) — "Happiness for the whole family." For a tai tai, family harmony and happiness is everything. This acknowledges her role as the family\'s anchor without being too career-focused.',
+        distractors: ['bubu','gongzuo','xueye','shengyi','shengguan'],
+      },
+      {
+        character: { icon:'📄', name:'Charmaine', role:'Peer · Job hunting', context:'She was retrenched three months ago. She\'s putting on a brave face but you can tell she\'s stressed. She keeps getting LinkedIn notifications during dinner.' },
+        correctId: 'gongzuo',
+        why: '工作顺利 (Gōng zuò shùn lì) — "May your work go smoothly." When someone\'s between jobs, wishing them smooth work prospects is both hopeful and specific to what they need right now.',
+        distractors: ['shenti','hejiaxf','niannian','shengyi','caiyuan'],
+      },
+      {
+        character: { icon:'📚', name:'Marcus Koh', role:'Family · Your 12-year-old cousin', context:'He\'s taking PSLE in six months. His mom keeps telling everyone he\'s "very stressed" while he plays mobile games under the table.' },
+        correctId: 'xueye',
+        why: '学业有成 (Xuéyè yǒu chéng) — "Academic success." For a kid facing Singapore\'s education system gauntlet, this is THE blessing. His mom will also appreciate it.',
+        distractors: ['shenti','hejiaxf','bubu','gongzuo','yima'],
+      },
+      {
+        character: { icon:'💍', name:'Vincent & Karen', role:'Peer · Just got engaged', context:'They\'re showing everyone the ring and trying to decide between a hotel ballroom or a garden wedding. The uncles are already calculating ang bao amounts.' },
+        correctId: 'hejiaxf',
+        why: '阖家幸福 (Hé jiā xìng fú) — "Happiness for the whole family." For newly engaged couples, this blesses their future family and the union of two households — especially meaningful in Asian culture.',
+        distractors: ['bubu','caiyuan','xueye','shengyi','yima'],
+      },
+      {
+        character: { icon:'🚀', name:'Boon Huat', role:'Peer · Tech startup founder', context:'He quit his banking job last year to build an app. He just closed a seed round and won\'t stop talking about "disrupting the hawker industry."' },
+        correctId: 'shiye',
+        why: '事业有成 (Shì yè yǒu chéng) — "Career success & achievement." For an entrepreneur who took the risk, this acknowledges his ambition and wishes his venture achieves the success he\'s chasing.',
+        distractors: ['shenti','hejiaxf','xueye','longma','niannian'],
+      },
+      {
+        character: { icon:'✈️', name:'Wei Jie', role:'Peer · Studying in Melbourne', context:'She flew back from uni for CNY. She keeps saying "yeah nah" and her Singaporean accent has gotten noticeably weaker. Her mom looks worried.' },
+        correctId: 'xueye',
+        why: '学业有成 (Xuéyè yǒu chéng) — "Academic success." For someone studying overseas, this wishes them well in their academic journey and subtly says "we\'re proud you\'re out there studying."',
+        distractors: ['yifan','hejiaxf','gongzuo','shengyi','caiyuan'],
+      },
+      {
+        character: { icon:'🏋️', name:'Uncle Stephen', role:'Family · Fitness enthusiast uncle', context:'He just completed his first marathon at age 55. He\'s wearing his finisher medal to dinner and keeps flexing. Everyone\'s heard the story three times.' },
+        correctId: 'shenti',
+        why: '身体健康 (Shēn tǐ jiàn kāng) — "Wishing you good health." For a fitness-focused older relative who\'s clearly proud of staying active, this celebrates his dedication to health.',
+        distractors: ['bubu','caiyuan','shengyi','yima','hejiaxf'],
       },
     ];
 
@@ -642,6 +1072,11 @@
       gameComplete: false,
       roundHistory: [],
       peekedIds: [],
+
+      charSvg(name) {
+        const key = SVG_NAME_MAP[name] || 'peer_m';
+        return CHARACTER_SVGS[key] || CHARACTER_SVGS['peer_m'];
+      },
 
       get currentRound() {
         return this.rounds[this.roundIndex] || null;
