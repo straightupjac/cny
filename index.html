@@ -1234,13 +1234,13 @@
       tip.style.top = y + 'px';
     }
     function hideTip(){ tip.classList.remove('visible'); }
-    document.querySelectorAll('.hero-char[data-tip]').forEach(function(el){
-      el.addEventListener('mouseenter', function(){ showTip(el); });
-      el.addEventListener('mouseleave', hideTip);
+    document.addEventListener('mouseover', function(e){
+      var el = e.target.closest('.hero-char[data-tip]');
+      if(el){ showTip(el); } else { hideTip(); }
     });
     var activeMobile = null;
-    document.querySelector('.mobile-guests').addEventListener('click', function(e){
-      var el = e.target.closest('[data-tip]');
+    document.addEventListener('click', function(e){
+      var el = e.target.closest('.mobile-guests [data-tip]');
       if(!el){ hideTip(); activeMobile = null; return; }
       if(activeMobile === el){ hideTip(); activeMobile = null; return; }
       activeMobile = el;
