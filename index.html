@@ -52,7 +52,8 @@
 
     .hero-char,.mobile-guests>div{transform-origin:center bottom}
     .hero-char{z-index:20}
-    .hero-char[data-tip]:hover::after,.mobile-guests>div[data-tip].show-tip::after{content:attr(data-tip);position:absolute;left:50%;transform:translateX(-50%);bottom:100%;margin-bottom:4px;background:var(--ink-black);color:#fff;font-size:11px;font-style:normal;font-weight:400;line-height:1.4;padding:6px 10px;border-radius:8px;white-space:normal;width:max-content;max-width:200px;text-align:center;pointer-events:none;z-index:50}
+    #char-tooltip{position:fixed;background:var(--ink-black);color:#fff;font-size:11px;font-weight:400;line-height:1.4;padding:6px 10px;border-radius:8px;max-width:200px;text-align:center;pointer-events:none;z-index:100;opacity:0;transition:opacity .15s}
+    #char-tooltip.visible{opacity:1}
     .char-ahma{animation:charSway 5s ease-in-out infinite}
     .char-boonhuat{animation:charNod 3.5s ease-in-out infinite}
     .char-david{animation:charBounce 2.5s ease-in-out infinite}
@@ -383,7 +384,7 @@
       <!-- Mobile-only character grid (SVGs) -->
       <div class="md:hidden mt-6 w-full">
         <p class="text-xs font-semibold tracking-widest uppercase mb-4" style="color:var(--harvest-gold)">Meet the Guests</p>
-        <div class="mobile-guests grid grid-cols-5 gap-2 max-w-md mx-auto" @click="if($event.target.closest('[data-tip]')){const el=$event.target.closest('[data-tip]');document.querySelectorAll('.mobile-guests .show-tip').forEach(e=>{if(e!==el)e.classList.remove('show-tip')});el.classList.toggle('show-tip')}">
+        <div class="mobile-guests grid grid-cols-5 gap-2 max-w-md mx-auto">
           <!-- Ah Ma -->
           <div class="text-center char-ahma" :data-tip="charContext('Ah Ma')">
             <svg class="mx-auto" width="48" height="60" viewBox="0 0 56 72" fill="none"><circle cx="28" cy="16" r="11" fill="#FFF" stroke="var(--imperial-red)" stroke-width="2"/><circle cx="23" cy="14" r="1.5" fill="var(--ink-black)"/><circle cx="33" cy="14" r="1.5" fill="var(--ink-black)"/><path d="M24 19c2 2 6 2 8 0" stroke="var(--imperial-red)" stroke-width="1.5" stroke-linecap="round"/><circle cx="23" cy="14" r="4" stroke="var(--harvest-gold)" stroke-width="1" fill="none"/><circle cx="33" cy="14" r="4" stroke="var(--harvest-gold)" stroke-width="1" fill="none"/><line x1="27" y1="14" x2="29" y2="14" stroke="var(--harvest-gold)" stroke-width="1"/><line x1="28" y1="27" x2="28" y2="50" stroke="var(--imperial-red)" stroke-width="2.5" stroke-linecap="round"/><line x1="28" y1="35" x2="18" y2="44" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="35" x2="38" y2="44" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="20" y2="65" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="28" y1="50" x2="36" y2="65" stroke="var(--imperial-red)" stroke-width="2" stroke-linecap="round"/><line x1="38" y1="44" x2="42" y2="64" stroke="var(--harvest-gold)" stroke-width="1.5" stroke-linecap="round"/></svg>
@@ -1211,6 +1212,41 @@
       },
     };
   }
+  </script>
+  <div id="char-tooltip"></div>
+  <script>
+  (function(){
+    const tip = document.getElementById('char-tooltip');
+    function showTip(el){
+      const text = el.getAttribute('data-tip');
+      if(!text) return;
+      tip.textContent = text;
+      tip.classList.add('visible');
+      const r = el.getBoundingClientRect();
+      tip.style.left = '0'; tip.style.top = '0';
+      const tw = tip.offsetWidth, th = tip.offsetHeight;
+      let x = r.left + r.width/2 - tw/2;
+      let y = r.top - th - 6;
+      if(x < 8) x = 8;
+      if(x + tw > window.innerWidth - 8) x = window.innerWidth - tw - 8;
+      if(y < 8){ y = r.bottom + 6; }
+      tip.style.left = x + 'px';
+      tip.style.top = y + 'px';
+    }
+    function hideTip(){ tip.classList.remove('visible'); }
+    document.querySelectorAll('.hero-char[data-tip]').forEach(function(el){
+      el.addEventListener('mouseenter', function(){ showTip(el); });
+      el.addEventListener('mouseleave', hideTip);
+    });
+    var activeMobile = null;
+    document.querySelector('.mobile-guests').addEventListener('click', function(e){
+      var el = e.target.closest('[data-tip]');
+      if(!el){ hideTip(); activeMobile = null; return; }
+      if(activeMobile === el){ hideTip(); activeMobile = null; return; }
+      activeMobile = el;
+      showTip(el);
+    });
+  })();
   </script>
 </body>
 </html>
