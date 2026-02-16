@@ -632,7 +632,7 @@
                    'opt-disabled': roundResult && opt.id !== currentRound.correctId && opt.id !== selectedAnswerId
                  }">
               <p class="font-cn text-xl font-bold" style="color:var(--imperial-red)" x-text="opt.hanzi"></p>
-              <p class="text-xs font-medium mt-1" style="color:var(--harvest-gold)" x-text="opt.pinyin + ' / ' + opt.canto"></p>
+              <p class="text-xs font-medium mt-1" style="color:#B8960C" x-text="opt.pinyin + ' / ' + opt.canto"></p>
               <p class="meaning-hint text-center mt-1" x-show="!roundResult && !peekedIds.includes(opt.id)" @click.stop="togglePeek(opt.id)">tap to peek meaning</p>
               <div class="meaning-reveal" :class="(roundResult || peekedIds.includes(opt.id)) ? 'meaning-show' : ''">
                 <p class="text-xs text-gray-500 leading-relaxed pt-1" x-text="opt.meaning"></p>
